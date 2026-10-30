@@ -17,7 +17,10 @@ setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T
 2,task retried alone (9735bb30),2026-10-30T13:30:41Z,2026-10-30T13:31:28Z,turn_failed: same error; blocked on CodeRabbit
 2+3,paused: Coding Agent outage (maintainer notice),2026-10-30T13:43:26Z,2026-10-30T20:06:43Z,CodeRabbit outage; resumed on maintainer notice (task 9735bb30 found implementing)
 2,agent turn after outage: environment setup only (task 9735bb30),2026-10-30T20:06:43Z,2026-10-30T20:08:18Z,no file changes; brief resent
-3,task created (pre-flight; b2519e0c),2026-10-30T20:07:09Z,,lane B
+3,task created (pre-flight; b2519e0c),2026-10-30T20:07:09Z,2026-10-30T20:13:49Z,pre-flight passed; implemented; 7 files; patch 52e2b66
 2,pre-flight (agent): 2 conflicts found,2026-10-30T20:10:19Z,2026-10-30T20:12:14Z,golden:check missing before PR 3; contract contradiction on applyCoupon failure state
 2,orchestrator: fix brief 02 + contract (docs PR #1 9f142e1),2026-10-30T20:12:14Z,2026-10-30T20:15:00Z,"spec defect, not agent"
-2,implement (agent; 9735bb30),2026-10-30T20:15:00Z,,
+2,implement (agent; 9735bb30),2026-10-30T20:15:00Z,2026-10-30T20:17:03Z,9 files; patch 5837179
+3,verify (scope gate x2; checks; CLI review 1 Minor; 4 judges PASS),2026-10-30T20:14:02Z,2026-10-30T20:19:00Z,tests judge: 8 advisory mutation survivors
+3,pre-PR fix round 1 (CLI Minor + contrast test gaps),2026-10-30T20:19:00Z,,
+2,"verify (scope gate x2 PASS; checks, CLI review, 4 judges running)",2026-10-30T20:17:20Z,,
