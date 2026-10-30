@@ -18,4 +18,6 @@ setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T
 2+3,paused: Coding Agent outage (maintainer notice),2026-10-30T13:43:26Z,2026-10-30T20:06:43Z,CodeRabbit outage; resumed on maintainer notice (task 9735bb30 found implementing)
 2,agent turn after outage: environment setup only (task 9735bb30),2026-10-30T20:06:43Z,2026-10-30T20:08:18Z,no file changes; brief resent
 3,task created (pre-flight; b2519e0c),2026-10-30T20:07:09Z,,lane B
-2,implement (agent; brief resent to 9735bb30),2026-10-30T20:12:00Z,,
+2,pre-flight (agent): 2 conflicts found,2026-10-30T20:10:19Z,2026-10-30T20:12:14Z,golden:check missing before PR 3; contract contradiction on applyCoupon failure state
+2,orchestrator: fix brief 02 + contract (docs PR #1 9f142e1),2026-10-30T20:12:14Z,2026-10-30T20:15:00Z,"spec defect, not agent"
+2,implement (agent; 9735bb30),2026-10-30T20:15:00Z,,
