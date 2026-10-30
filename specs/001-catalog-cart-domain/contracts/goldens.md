@@ -1,0 +1,7 @@
+# Contract: domain goldens
+
+- `npm run golden:capture` → `node --experimental-strip-types scripts/goldens/capture.mjs`: runs every scenario in `scripts/goldens/scenarios.mjs`, writes `tests/golden/domain/<scenario>.json`, `tests/golden/domain/MANIFEST.sha256` and `tests/golden/domain/BASELINE` (`git rev-parse HEAD` at capture time, i.e. the commit the goldens were captured from, the parent of the pin commit).
+- `npm run golden:check` → `node --experimental-strip-types scripts/goldens/capture.mjs --check`: recomputes every `<scenario>.json` and `MANIFEST.sha256` in memory (it never recomputes or compares `BASELINE`, which only has to exist); exit 0 when every file matches byte-for-byte and no file is missing or extra; otherwise exit 1 and print `golden mismatch: <scenario>` per difference. With zero scenarios and no `tests/golden/domain/` directory, exit 0.
+- `npm run golden:capture:pages` → `playwright test --grep @golden --update-snapshots`: refreshes page aria snapshots (spec 002 onward).
+- A scenario is `{ name: string; run: () => unknown }`, `name` matching `^[a-z0-9-]+$`, unique.
+- Required scenarios (pin phase): `rule1-two-colors`, `rule1-merge-same-color`, `rule2-quantity-clamp`, `rule2-line-and-subtotal`, `rule3-apply-desk15`, `rule3-recompute-on-change`, `rule3-removed-below-100`, `rule3-invalid-code`, `rule4-standard-free`, `rule4-express-12`, `rule4-coupon-and-express`, `rule5-wishlist-kept-on-sign-in`, `rule6-multi-item-order`, `rule6-history-two-orders`, `catalog-summary`.

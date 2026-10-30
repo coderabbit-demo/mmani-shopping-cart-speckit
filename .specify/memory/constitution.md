@@ -9,8 +9,8 @@ request in this repository.
 ### I. One Writer
 
 - The CodeRabbit Coding Agent MUST author all product code and tests: everything under `app/`,
-  `components/`, `lib/`, `tests/`, `scripts/` (except `scripts/golden/`), `public/`, and the npm
-  manifest, lockfile and tool configuration.
+  `components/`, `lib/`, `tests/`, `scripts/` (except `scripts/golden/`), `public/`, `README.md`, and
+  the npm manifest, lockfile and tool configuration.
 - The orchestrator MUST write only Spec Kit artifacts (`.specify/memory/`, `specs/`), briefs
   (`docs/briefs/`), run documentation under `docs/`, and repository configuration
   (`.coderabbit.yaml`, `AGENTS.md`, `.github/workflows/`, `scripts/golden/`).
@@ -119,4 +119,4 @@ Amendments require the maintainer's approval, land as their own docs-only commit
 version: MAJOR for removing or redefining a principle, MINOR for a new principle or materially
 expanded rule, PATCH for wording. Reviewers and judges verify compliance on every PR.
 
-**Version**: 1.0.0 | **Ratified**: 2026-10-29 | **Last Amended**: 2026-10-29
+**Version**: 1.0.1 | **Ratified**: 2026-10-29 | **Last Amended**: 2026-10-30

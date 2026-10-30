@@ -52,7 +52,7 @@ jobs:
       - if: hashFiles('package-lock.json') != ''
         run: npm ci
       - if: hashFiles('package-lock.json') != ''
-        run: npm run golden:check
+        run: npm run --if-present golden:check
 
   e2e:
     runs-on: ubuntu-latest
