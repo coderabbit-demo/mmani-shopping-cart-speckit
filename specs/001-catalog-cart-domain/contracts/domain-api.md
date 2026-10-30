@@ -25,7 +25,7 @@ Constants:
   - `INVALID_COLOR_ERROR = "Choose an available color."`
   - `OUT_OF_STOCK_ERROR = "This item is out of stock."`
 
-Functions (`Result<T> = { ok: true; state: StoreState } | { ok: false; state: StoreState; error: string }`; `state` on failure is the unchanged input):
+Functions (`Result<T> = { ok: true; state: StoreState } | { ok: false; state: StoreState; error: string }`; `state` on failure is the unchanged input, except that `applyCoupon` clears `couponNotice` in both outcomes):
 
 | Function | Behavior |
 | --- | --- |
