@@ -7,13 +7,14 @@
 
 Implement tasks T024–T028 of `specs/001-catalog-cart-domain/tasks.md`. Mark each task done in tasks.md as you finish it. Leave tasks outside this range untouched.
 
-## Assumptions (to verify before start)
+## Assumptions (pre-checked on the PR 1 head; re-verify on main after PR 1 merges)
 
 <!-- The orchestrator re-verifies each line against main right before start-task and rewrites the heading as "verified <date> on main <sha>". -->
 
 - PR 1 is merged; PR 2 may not be. Nothing here may import `lib/store.ts` or `lib/catalog.ts`.
 - `scripts/golden/` holds the orchestrator's gate scripts; golden tooling goes in `scripts/goldens/`.
 - CI runs `npm run --if-present golden:check`, so adding the script makes the golden job live.
+- Pre-checked 2026-10-30 on PR #2 head 55ab10f: CI runs `npm run --if-present golden:check`; `package.json` has no `golden:*` scripts yet; `scripts/goldens/` and `tests/golden/` do not exist.
 
 ## Goal
 
