@@ -12,7 +12,10 @@
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "golden:capture": "node --experimental-strip-types scripts/goldens/capture.mjs",
+    "golden:check": "node --experimental-strip-types scripts/goldens/capture.mjs --check",
+    "golden:capture:pages": "playwright test --grep @golden --update-snapshots"
   },
   "dependencies": {
     "lucide-react": "1.63.0",

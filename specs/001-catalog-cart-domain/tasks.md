@@ -94,11 +94,11 @@ description: "Task list for the catalog and cart domain"
 
 **Depends on**: Phase 1 only. Touches no file that Phases 2–8 touch.
 
-- [ ] T024 [P] Write `tests/goldens-harness.test.mjs`: with a temporary scenario list and output directory, capture writes one file per scenario plus `MANIFEST.sha256` and `BASELINE`; check exits 0 on a match, exits 1 naming the scenario on a changed, missing or extra file; zero scenarios and no directory exit 0; a `BASELINE` naming a different commit does not fail the check (contracts/goldens.md)
-- [ ] T025 Create `scripts/goldens/capture.mjs` (capture and `--check`, with injectable scenario list and output directory for the test) and `scripts/goldens/scenarios.mjs` exporting an empty `scenarios` array
-- [ ] T026 [P] Write `tests/contrast.test.mjs`: `contrastRatio("#000000", "#ffffff")` is 21, a color against itself is 1, the ratio is symmetric, `meetsAA(ratio, { largeText })` uses 4.5 and 3
-- [ ] T027 Create `lib/contrast.ts` exporting `relativeLuminance`, `contrastRatio` and `meetsAA` (WCAG 2.x formulas)
-- [ ] T028 Add `golden:capture`, `golden:check` and `golden:capture:pages` to `package.json` scripts (contracts/goldens.md); run `npm test` and `npm run golden:check`
+- [x] T024 [P] Write `tests/goldens-harness.test.mjs`: with a temporary scenario list and output directory, capture writes one file per scenario plus `MANIFEST.sha256` and `BASELINE`; check exits 0 on a match, exits 1 naming the scenario on a changed, missing or extra file; zero scenarios and no directory exit 0; a `BASELINE` naming a different commit does not fail the check (contracts/goldens.md)
+- [x] T025 Create `scripts/goldens/capture.mjs` (capture and `--check`, with injectable scenario list and output directory for the test) and `scripts/goldens/scenarios.mjs` exporting an empty `scenarios` array
+- [x] T026 [P] Write `tests/contrast.test.mjs`: `contrastRatio("#000000", "#ffffff")` is 21, a color against itself is 1, the ratio is symmetric, `meetsAA(ratio, { largeText })` uses 4.5 and 3
+- [x] T027 Create `lib/contrast.ts` exporting `relativeLuminance`, `contrastRatio` and `meetsAA` (WCAG 2.x formulas)
+- [x] T028 Add `golden:capture`, `golden:check` and `golden:capture:pages` to `package.json` scripts (contracts/goldens.md); run `npm test` and `npm run golden:check`
 
 ---
 
