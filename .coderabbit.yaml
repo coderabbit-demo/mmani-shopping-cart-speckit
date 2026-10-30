@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://www.coderabbit.ai/integrations/schema.v2.json
+reviews:
+  request_changes_workflow: true
+  auto_review:
+    auto_pause_after_reviewed_commits: 10
+  path_filters:
+    - "!.claude/skills/speckit-*/**"
+    - "!.specify/templates/**"
+    - "!.specify/scripts/**"
+    - "!.specify/workflows/**"
+    - "!.specify/integrations/**"
+  path_instructions:
+    - path: "specs/**"
+      instructions: >-
+        Spec Kit artifacts are written by the orchestrator. In a PR authored by the
+        Coding Agent, the only allowed change under specs/ is ticking tasks in the
+        brief's task range of tasks.md from "- [ ]" to "- [x]". Any other edit to
+        spec.md, plan.md, research.md, data-model.md, contracts/ or quickstart.md,
+        or ticking a task outside the range, is a Major finding. Check the PR's code
+        against the acceptance scenarios in the matching spec.md.
+    - path: "tests/golden/**"
+      instructions: >-
+        Any golden change in a PR whose title starts with refactor is a Critical
+        finding. In a fix or feat PR, every golden difference must match the PR
+        description. Goldens may change only when the brief explicitly allows it.
+    - path: "app/**/*.css"
+      instructions: >-
+        Follow docs/BRAND.md. Any raw hex or rgb color outside a :root token block
+        in app/globals.css is a Major finding. Light-theme token overrides must
+        also be inside a :root block. Components must use color tokens.
+    - path: "components/**"
+      instructions: >-
+        Follow docs/BRAND.md. Any raw hex or rgb color outside a :root token block
+        in app/globals.css is a Major finding. Components must use color tokens.
+  tools:
+    gitleaks:
+      enabled: true
+    semgrep:
+      enabled: true
+    eslint:
+      enabled: false
+  pre_merge_checks:
+    custom_checks:
+      - name: Security Gate
+        mode: error
+        instructions: "Fail only when the review finds security-related major or critical issues (command injection, committed secrets, SSRF, path traversal, insecure infrastructure, ...)."
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "**/AGENTS.md"
+      - "docs/BRAND.md"
+      - ".specify/memory/constitution.md"

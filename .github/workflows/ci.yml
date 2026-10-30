@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: hashFiles('package-lock.json') != ''
+        with:
+          node-version: 22
+          cache: npm
+      - if: hashFiles('package-lock.json') != ''
+        run: npm ci
+      - if: hashFiles('package-lock.json') != ''
+        run: npm run typecheck
+
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: hashFiles('package-lock.json') != ''
+        with:
+          node-version: 22
+          cache: npm
+      - if: hashFiles('package-lock.json') != ''
+        run: npm ci
+      - if: hashFiles('package-lock.json') != ''
+        run: npm test
+
+  golden:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: hashFiles('package-lock.json') != ''
+        with:
+          node-version: 22
+          cache: npm
+      - if: hashFiles('package-lock.json') != ''
+        run: npm ci
+      - if: hashFiles('package-lock.json') != ''
+        run: npm run golden:check
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: hashFiles('playwright.config.ts') != ''
+        with:
+          node-version: 22
+          cache: npm
+      - if: hashFiles('playwright.config.ts') != ''
+        run: npm ci
+      - if: hashFiles('playwright.config.ts') != ''
+        run: npx playwright install --with-deps chromium
+      - if: hashFiles('playwright.config.ts') != ''
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure() && hashFiles('playwright.config.ts') != ''
+        with:
+          name: playwright-report
+          path: playwright-report/
