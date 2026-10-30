@@ -1,1 +1,12 @@
 pr,stage,start_utc,end_utc,notes
+setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T05:20:00Z,2026-10-30T06:05:00Z,maintainer + CodeRabbit environment; excluded from active time
+1,task created (plan-first),2026-10-30T06:06:19Z,,task 244a0a83
+1,agent plan turn,2026-10-30T06:06:19Z,2026-10-30T06:08:00Z,
+1,implement (agent),2026-10-30T06:09:00Z,2026-10-30T06:14:20Z,first agent commit 55ab10f pushed 06:15:02
+1,verify (scope gate x2; checks; CLI review 0 findings; 4 judges PASS),2026-10-30T06:15:02Z,2026-10-30T06:19:50Z,no pre-PR fix round
+1,PR opened,2026-10-30T06:20:00Z,,PR #2
+1,post-PR review (CodeRabbit: 1 Minor, typecheck on fresh clone),2026-10-30T06:20:00Z,2026-10-30T06:31:22Z,finding not reproducible; replied with evidence, no fix round
+1,CodeRabbit infra wait: reply on withdrawn finding,2026-10-30T06:31:22Z,2026-10-30T06:52:36Z,CodeRabbit wait; excluded from active time; finding withdrawn
+1,blocked: triage rule not merging; own merge denied by permission classifier,2026-10-30T06:31:56Z,,approved+gated at 55ab10f; maintainer wait
+1,maintainer wait: poller 2h timeout with PR #2 still open (checks green; CLEAN),2026-10-30T07:20:58Z,2026-10-30T09:21:12Z,maintainer wait; poller restarted
+1,maintainer wait: second poller 3h timeout with PR #2 still open,2026-10-30T09:21:12Z,2026-10-30T12:21:58Z,maintainer wait
