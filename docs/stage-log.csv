@@ -10,3 +10,6 @@ setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T
 1,blocked: triage rule not merging; own merge denied by permission classifier,2026-10-30T06:31:56Z,,approved+gated at 55ab10f; maintainer wait
 1,maintainer wait: poller 2h timeout with PR #2 still open (checks green; CLEAN),2026-10-30T07:20:58Z,2026-10-30T09:21:12Z,maintainer wait; poller restarted
 1,maintainer wait: second poller 3h timeout with PR #2 still open,2026-10-30T09:21:12Z,2026-10-30T12:21:58Z,maintainer wait
+1,maintainer wait: until merge,2026-10-30T12:21:58Z,2026-10-30T13:27:11Z,maintainer wait; merged by maintainer as a2df267
+1,post-merge audit (strict-gate PASS at 55ab10f),2026-10-30T13:27:45Z,2026-10-30T13:29:00Z,
+2+3,re-verify briefs 02 and 03 on main a2df267,2026-10-30T13:29:00Z,2026-10-30T13:33:00Z,all assumptions hold

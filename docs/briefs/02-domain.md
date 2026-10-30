@@ -7,7 +7,7 @@
 
 Implement tasks T009–T023 of `specs/001-catalog-cart-domain/tasks.md`. Mark each task done in tasks.md as you finish it. Leave tasks outside this range untouched.
 
-## Assumptions (pre-checked on the PR 1 head; re-verify on main after PR 1 merges)
+## Assumptions (verified 2026-10-30 on main a2df267)
 
 <!-- The orchestrator re-verifies each line against main right before start-task and rewrites the heading as "verified <date> on main <sha>". -->
 
