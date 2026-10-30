@@ -23,4 +23,5 @@ setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T
 2,implement (agent; 9735bb30),2026-10-30T20:15:00Z,2026-10-30T20:17:03Z,9 files; patch 5837179
 3,verify (scope gate x2; checks; CLI review 1 Minor; 4 judges PASS),2026-10-30T20:14:02Z,2026-10-30T20:19:00Z,tests judge: 8 advisory mutation survivors
 3,pre-PR fix round 1 (CLI Minor + contrast test gaps),2026-10-30T20:19:00Z,,
-2,"verify (scope gate x2 PASS; checks, CLI review, 4 judges running)",2026-10-30T20:17:20Z,,
+2,verify (scope gate x2 PASS; checks PASS; CLI review 0 findings; security+behavior PASS; scope FAIL),2026-10-30T20:17:20Z,2026-10-30T20:24:00Z,scope FAIL: brief claims contract on main has applyCoupon exception; fix only on docs PR #1 (orchestrator defect); tests judge pending
+docs,docs PR #1 thread: stale npm test finding replied + resolved,2026-10-30T20:24:00Z,2026-10-30T20:25:00Z,finding read pre-merge boilerplate package.json
