@@ -1,0 +1,12 @@
+{
+  "name": "deskdrop-bootstrap",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Environment bootstrap only: a placeholder so the CodeRabbit environment can be prepared before the scaffold PR exists. Not for merge.",
+  "type": "module",
+  "engines": { "node": ">=22.6.0" },
+  "scripts": {
+    "build": "node -e \"console.log('bootstrap: nothing to build')\"",
+    "start": "node bootstrap/server.mjs"
+  }
+}
