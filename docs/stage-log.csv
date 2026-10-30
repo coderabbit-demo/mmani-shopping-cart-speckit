@@ -17,3 +17,4 @@ setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T
 2,task retried alone (9735bb30),2026-10-30T13:30:41Z,2026-10-30T13:31:28Z,turn_failed: same error; blocked on CodeRabbit
 2+3,paused: Coding Agent outage (maintainer notice),2026-10-30T13:43:26Z,2026-10-30T20:06:43Z,CodeRabbit outage; resumed on maintainer notice (task 9735bb30 found implementing)
 2,implement (agent; task 9735bb30 resumed after outage),2026-10-30T20:06:43Z,,
+3,task created (pre-flight; b2519e0c),2026-10-30T20:07:09Z,,lane B
