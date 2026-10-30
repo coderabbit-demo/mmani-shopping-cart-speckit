@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, renameSync, rmSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -56,8 +56,20 @@ try {
   } else {
     const baseline = execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
     mkdirSync(output, { recursive: true });
-    for (const [name, contents] of files) writeFileSync(join(output, name), contents);
-    writeFileSync(join(output, "BASELINE"), `${baseline}\n`);
+    for (const entry of readdirSync(output, { withFileTypes: true })) {
+      if (entry.name.endsWith(".json") && !files.has(entry.name) && (entry.isFile() || entry.isSymbolicLink())) {
+        unlinkSync(join(output, entry.name));
+      }
+    }
+    const staging = mkdtempSync(join(output, ".golden-capture-"));
+    try {
+      for (const [name, contents] of [...files, ["BASELINE", `${baseline}\n`]]) {
+        writeFileSync(join(staging, name), contents);
+        renameSync(join(staging, name), join(output, name));
+      }
+    } finally {
+      rmSync(staging, { recursive: true, force: true });
+    }
   }
 } catch (error) {
   console.error(error.message);
