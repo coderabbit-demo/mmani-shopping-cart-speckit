@@ -1,1 +1,27 @@
 pr,stage,start_utc,end_utc,notes
+setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T05:20:00Z,2026-10-30T06:05:00Z,maintainer + CodeRabbit environment; excluded from active time
+1,task created (plan-first),2026-10-30T06:06:19Z,,task 244a0a83
+1,agent plan turn,2026-10-30T06:06:19Z,2026-10-30T06:08:00Z,
+1,implement (agent),2026-10-30T06:09:00Z,2026-10-30T06:14:20Z,first agent commit 55ab10f pushed 06:15:02
+1,verify (scope gate x2; checks; CLI review 0 findings; 4 judges PASS),2026-10-30T06:15:02Z,2026-10-30T06:19:50Z,no pre-PR fix round
+1,PR opened,2026-10-30T06:20:00Z,,PR #2
+1,post-PR review (CodeRabbit: 1 Minor, typecheck on fresh clone),2026-10-30T06:20:00Z,2026-10-30T06:31:22Z,finding not reproducible; replied with evidence, no fix round
+1,CodeRabbit infra wait: reply on withdrawn finding,2026-10-30T06:31:22Z,2026-10-30T06:52:36Z,CodeRabbit wait; excluded from active time; finding withdrawn
+1,blocked: triage rule not merging; own merge denied by permission classifier,2026-10-30T06:31:56Z,,approved+gated at 55ab10f; maintainer wait
+1,maintainer wait: poller 2h timeout with PR #2 still open (checks green; CLEAN),2026-10-30T07:20:58Z,2026-10-30T09:21:12Z,maintainer wait; poller restarted
+1,maintainer wait: second poller 3h timeout with PR #2 still open,2026-10-30T09:21:12Z,2026-10-30T12:21:58Z,maintainer wait
+1,maintainer wait: until merge,2026-10-30T12:21:58Z,2026-10-30T13:27:11Z,maintainer wait; merged by maintainer as a2df267
+1,post-merge audit (strict-gate PASS at 55ab10f),2026-10-30T13:27:45Z,2026-10-30T13:29:00Z,
+2+3,re-verify briefs 02 and 03 on main a2df267,2026-10-30T13:29:00Z,2026-10-30T13:33:00Z,all assumptions hold
+2+3,tasks created in parallel (2d7fb0c0 / 381c711f),2026-10-30T13:28:42Z,2026-10-30T13:30:22Z,both turn_failed: Connected KB mounts could not be retired; CodeRabbit infra; no changes
+2,task retried alone (9735bb30),2026-10-30T13:30:41Z,2026-10-30T13:31:28Z,turn_failed: same error; blocked on CodeRabbit
+2+3,paused: Coding Agent outage (maintainer notice),2026-10-30T13:43:26Z,2026-10-30T20:06:43Z,CodeRabbit outage; resumed on maintainer notice (task 9735bb30 found implementing)
+2,agent turn after outage: environment setup only (task 9735bb30),2026-10-30T20:06:43Z,2026-10-30T20:08:18Z,no file changes; brief resent
+3,task created (pre-flight; b2519e0c),2026-10-30T20:07:09Z,2026-10-30T20:13:49Z,pre-flight passed; implemented; 7 files; patch 52e2b66
+2,pre-flight (agent): 2 conflicts found,2026-10-30T20:10:19Z,2026-10-30T20:12:14Z,golden:check missing before PR 3; contract contradiction on applyCoupon failure state
+2,orchestrator: fix brief 02 + contract (docs PR #1 9f142e1),2026-10-30T20:12:14Z,2026-10-30T20:15:00Z,"spec defect, not agent"
+2,implement (agent; 9735bb30),2026-10-30T20:15:00Z,2026-10-30T20:17:03Z,9 files; patch 5837179
+3,verify (scope gate x2; checks; CLI review 1 Minor; 4 judges PASS),2026-10-30T20:14:02Z,2026-10-30T20:19:00Z,tests judge: 8 advisory mutation survivors
+3,pre-PR fix round 1 (CLI Minor + contrast test gaps),2026-10-30T20:19:00Z,,
+2,verify (scope gate x2 PASS; checks PASS; CLI review 0 findings; security+behavior PASS; scope FAIL),2026-10-30T20:17:20Z,2026-10-30T20:24:00Z,scope FAIL: brief claims contract on main has applyCoupon exception; fix only on docs PR #1 (orchestrator defect); tests judge pending
+docs,docs PR #1 thread: stale npm test finding replied + resolved,2026-10-30T20:24:00Z,2026-10-30T20:25:00Z,finding read pre-merge boilerplate package.json

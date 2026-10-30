@@ -7,17 +7,19 @@
 
 Implement tasks T001–T008 of `specs/001-catalog-cart-domain/tasks.md`. Mark each task done in tasks.md as you finish it. Leave tasks outside this range untouched.
 
-## Assumptions (verified 2026-10-30 on main 07e294c)
+## Assumptions (verified 2026-10-30 on main 4659e55)
 
 
-- `main` holds only docs and config: no `package.json`, `app/`, `lib/` or `tests/`.
-- CI (`.github/workflows/ci.yml`) skips its npm steps until `package-lock.json` exists, and its e2e steps until `playwright.config.ts` exists; it runs `npm run --if-present golden:check`.
+- `main` carries a maintainer-approved boilerplate startup scaffold (4659e55), not Coding Agent work: a dependency-free `package.json` and lockfile, `bootstrap/server.mjs`, `tests/server.test.mjs`, `.gitignore`, and `scripts/qa/setup.sh` / `scripts/qa/start.sh`. There is no `app/`, `lib/`, `tsconfig.json` or `playwright.config.ts`.
+- The QA scripts already have the target interface (`npm ci`; `npm run build`, then `exec npm run start -- --port 3100`, both `cd` to the repository root). Keep that interface; change them only if a task requires it.
+- CI runs its npm steps because a lockfile exists, skips its e2e steps until `playwright.config.ts` exists, and runs `npm run --if-present golden:check`. CI on 4659e55 is green.
+- `main` has the ruleset "main: Golden Framework gate": a PR with resolved threads, merge commits only, and `typecheck`, `unit`, `golden`, `e2e` and `CodeRabbit Security` passing on an up-to-date branch. All four CI job names must keep their names.
 - The exact versions in research.md R2 exist on the npm registry (checked 2026-10-30 with `npm view`; lucide-react 1.63.0 confirmed from the reference lockfile because the local npm cache is not readable).
 - Node on the orchestrator machine is ≥ 22.6.0; macOS ships bash 3.2, so the QA scripts must not use bash 4 features.
 
 ## Goal
 
-From a clean checkout, `scripts/qa/setup.sh` then `scripts/qa/start.sh` serve `/` on `0.0.0.0:3100` with a top-level heading "DeskDrop", and typecheck, unit and e2e commands pass, so the QA Agent environment can be prepared from `main`.
+Replace the boilerplate with the real Next.js scaffold. From a clean checkout, `scripts/qa/setup.sh` then `scripts/qa/start.sh` serve `/` on `0.0.0.0:3100` with a top-level heading "DeskDrop", and typecheck, unit and e2e commands pass, so the QA Agent environment can be prepared from `main`.
 
 ## Pre-flight
 
@@ -39,6 +41,8 @@ The orchestrator runs the required CodeRabbit CLI review on the pushed commit. I
 
 ```
 ALLOW: package.json
+ALLOW: bootstrap/**
+ALLOW: tests/server.test.mjs
 ALLOW: package-lock.json
 ALLOW: tsconfig.json
 ALLOW: next.config.ts
@@ -55,7 +59,7 @@ ALLOW: tests/e2e/smoke.spec.ts
 ALLOW: specs/001-catalog-cart-domain/tasks.md
 ```
 
-Everything else must not change, in particular `.github/**`, `scripts/golden/**`, `.coderabbit.yaml`, `AGENTS.md`, `.specify/**` and the other files under `specs/`.
+`bootstrap/` and `tests/server.test.mjs` must be deleted (the new smoke and script tests replace them). Everything else must not change, in particular `.github/**`, `scripts/golden/**`, `.coderabbit.yaml`, `AGENTS.md`, `.specify/**` and the other files under `specs/`.
 
 ## Required checks
 
