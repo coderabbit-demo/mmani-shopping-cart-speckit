@@ -15,4 +15,5 @@ setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T
 2+3,re-verify briefs 02 and 03 on main a2df267,2026-10-30T13:29:00Z,2026-10-30T13:33:00Z,all assumptions hold
 2+3,tasks created in parallel (2d7fb0c0 / 381c711f),2026-10-30T13:28:42Z,2026-10-30T13:30:22Z,both turn_failed: Connected KB mounts could not be retired; CodeRabbit infra; no changes
 2,task retried alone (9735bb30),2026-10-30T13:30:41Z,2026-10-30T13:31:28Z,turn_failed: same error; blocked on CodeRabbit
-2+3,paused: Coding Agent outage (maintainer notice),2026-10-30T13:43:26Z,,CodeRabbit outage; resume on maintainer notice
+2+3,paused: Coding Agent outage (maintainer notice),2026-10-30T13:43:26Z,2026-10-30T20:06:43Z,CodeRabbit outage; resumed on maintainer notice (task 9735bb30 found implementing)
+2,implement (agent; task 9735bb30 resumed after outage),2026-10-30T20:06:43Z,,
