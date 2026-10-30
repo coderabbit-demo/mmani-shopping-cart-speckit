@@ -5,6 +5,7 @@ import { initialState, addItem, changeQuantity, removeItem, totals, applyCoupon,
 
 const lamp = productById("arc-desk-lamp");
 const headphones = productById("hush-wireless-headphones");
+const organizer = productById("tidy-desk-organizer");
 const withLamp = (quantity) => addItem(initialState(), lamp, "Sage", quantity).state;
 
 test("DESK15 is normalized, accepted from $100, and applied to the subtotal", () => {
@@ -55,4 +56,40 @@ test("discount follows cart changes; removal remains until applied again", () =>
   assert.equal(removed.couponNotice, COUPON_REMOVED_NOTICE);
   assert.deepEqual(removeCoupon(removed), { ...removed, coupon: null, couponNotice: null });
   assert.deepEqual(removeCoupon(again), { ...again, coupon: null, couponNotice: null });
+});
+
+test("DESK15 applies at the exact $100 boundary", () => {
+  let state = addItem(initialState(), lamp, "Sage").state;
+  state = addItem(state, organizer, "Natural oak").state;
+  assert.equal(totals(state).subtotal, 100);
+  assert.equal(state.delivery, "standard");
+  const applied = applyCoupon(state, "DESK15");
+  assert.equal(applied.ok, true);
+  assert.equal(applied.state.coupon, "DESK15");
+  assert.deepEqual(totals(applied.state), { subtotal: 100, discount: 15, deliveryFee: 0, total: 85 });
+});
+
+test("DESK15 remains at $100 and is removed below the boundary", () => {
+  let state = addItem(initialState(), lamp, "Sage").state;
+  state = addItem(state, organizer, "Natural oak", 2).state;
+  assert.equal(totals(state).subtotal, 132);
+  const applied = applyCoupon(state, "DESK15");
+  assert.equal(applied.ok, true);
+  const boundary = changeQuantity(applied.state, organizer.id, "Natural oak", 1);
+  assert.equal(totals(boundary).subtotal, 100);
+  assert.equal(boundary.coupon, "DESK15");
+  assert.equal(boundary.couponNotice, null);
+  assert.equal(totals(boundary).discount, 15);
+  assert.equal(totals(boundary).total, 85);
+  assert.equal(applyCoupon(boundary, "DESK15").ok, true);
+
+  const clamped = changeQuantity(boundary, organizer.id, "Natural oak", 0);
+  assert.equal(clamped.cart.find((line) => line.productId === organizer.id).quantity, 1);
+  assert.equal(totals(clamped).subtotal, 100);
+  assert.equal(clamped.coupon, "DESK15");
+  assert.equal(clamped.couponNotice, null);
+  const below = removeItem(boundary, organizer.id, "Natural oak");
+  assert.equal(totals(below).subtotal, 68);
+  assert.equal(below.coupon, null);
+  assert.equal(below.couponNotice, COUPON_REMOVED_NOTICE);
 });
