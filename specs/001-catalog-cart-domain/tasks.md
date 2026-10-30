@@ -23,14 +23,14 @@ description: "Task list for the catalog and cart domain"
 
 **Independent Test**: `scripts/qa/setup.sh && scripts/qa/start.sh`, then `GET /`.
 
-- [ ] T001 [US1] Create `package.json` (name `deskdrop`, `"private": true`, `"type": "module"`, engines `node >=22.6.0`, exact dependency versions from research.md R2, scripts from R3) and generate `package-lock.json` with `npm install`
-- [ ] T002 [P] [US1] Create `tsconfig.json` (strict, `moduleResolution: "bundler"`, `noEmit`, Next.js plugin), `next.config.ts`, `next-env.d.ts` and `.gitignore` (`node_modules/`, `.next/`, `test-results/`, `playwright-report/`, `artifacts/`)
-- [ ] T003 [P] [US1] Create unstyled `app/layout.tsx` (`<html lang="en">`, title "DeskDrop") and `app/page.tsx` rendering a single `<h1>DeskDrop</h1>`
-- [ ] T004 [P] [US1] Create `scripts/qa/setup.sh` (`npm ci`) and `scripts/qa/start.sh` (`npm run build && npm run start -- --port 3100`, binding `0.0.0.0`), both executable, `set -euo pipefail`, changing to the repository root first (research.md R4)
-- [ ] T005 [P] [US1] Write `tests/qa-scripts.test.mjs`: both scripts exist, are executable, start with a bash shebang and `set -euo pipefail`; `setup.sh` runs `npm ci`; `start.sh` builds, then starts on port 3100; the `start` npm script binds `0.0.0.0` (US1 scenario 2)
-- [ ] T006 [US1] Create `playwright.config.ts` (Chromium; `webServer` runs `npm run build && npm run start -- --port $PLAYWRIGHT_PORT` with `PLAYWRIGHT_PORT` defaulting to 3100; `baseURL` from the same port; tests in `tests/e2e/`)
-- [ ] T007 [US1] Write `tests/e2e/smoke.spec.ts`: `GET /` returns 200 and has exactly one level-1 heading named "DeskDrop" (US1 scenario 2)
-- [ ] T008 [US1] Update `README.md` with run, check and QA-script instructions; run `npm run typecheck`, `npm test` and `npm run test:e2e` and confirm each exits 0; the CI `typecheck`, `unit` and `e2e` jobs on the PR head are the recorded evidence for US1 scenarios 1 and 3
+- [x] T001 [US1] Create `package.json` (name `deskdrop`, `"private": true`, `"type": "module"`, engines `node >=22.6.0`, exact dependency versions from research.md R2, scripts from R3) and generate `package-lock.json` with `npm install`
+- [x] T002 [P] [US1] Create `tsconfig.json` (strict, `moduleResolution: "bundler"`, `noEmit`, Next.js plugin), `next.config.ts`, `next-env.d.ts` and `.gitignore` (`node_modules/`, `.next/`, `test-results/`, `playwright-report/`, `artifacts/`)
+- [x] T003 [P] [US1] Create unstyled `app/layout.tsx` (`<html lang="en">`, title "DeskDrop") and `app/page.tsx` rendering a single `<h1>DeskDrop</h1>`
+- [x] T004 [P] [US1] Create `scripts/qa/setup.sh` (`npm ci`) and `scripts/qa/start.sh` (`npm run build && npm run start -- --port 3100`, binding `0.0.0.0`), both executable, `set -euo pipefail`, changing to the repository root first (research.md R4)
+- [x] T005 [P] [US1] Write `tests/qa-scripts.test.mjs`: both scripts exist, are executable, start with a bash shebang and `set -euo pipefail`; `setup.sh` runs `npm ci`; `start.sh` builds, then starts on port 3100; the `start` npm script binds `0.0.0.0` (US1 scenario 2)
+- [x] T006 [US1] Create `playwright.config.ts` (Chromium; `webServer` runs `npm run build && npm run start -- --port $PLAYWRIGHT_PORT` with `PLAYWRIGHT_PORT` defaulting to 3100; `baseURL` from the same port; tests in `tests/e2e/`)
+- [x] T007 [US1] Write `tests/e2e/smoke.spec.ts`: `GET /` returns 200 and has exactly one level-1 heading named "DeskDrop" (US1 scenario 2)
+- [x] T008 [US1] Update `README.md` with run, check and QA-script instructions; run `npm run typecheck`, `npm test` and `npm run test:e2e` and confirm each exits 0; the CI `typecheck`, `unit` and `e2e` jobs on the PR head are the recorded evidence for US1 scenarios 1 and 3
 
 **Checkpoint**: CI typecheck, unit and e2e jobs run for real and pass; the QA Agent environment can be prepared from `main`.
 
