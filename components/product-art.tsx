@@ -1,0 +1,15 @@
+import type { Art } from "../lib/catalog";
+
+export function ProductArt({ art }: { art: Art }) {
+  const drawings: Record<Art, React.ReactNode> = {
+    lamp: <><path d="M102 171h112l-10 12H112z" fill="var(--color-art-deep)"/><path d="M150 171l22-89 9 3-19 86z" fill="var(--color-primary)"/><path d="M126 75c11-30 50-41 76-15l-12 27-64-12z" fill="var(--color-primary)"/><path d="M133 77l55 11-4 10-54-10z" fill="var(--color-art-deep)"/><circle cx="175" cy="84" r="7" fill="var(--color-art-light)"/></>,
+    keyboard: <><rect x="58" y="84" width="204" height="91" rx="12" fill="var(--color-art-deep)"/><rect x="64" y="77" width="192" height="91" rx="11" fill="var(--color-art-light)"/>{Array.from({length: 4}, (_, row) => Array.from({length: 9}, (_, col) => <rect key={`${row}-${col}`} x={75 + col * 19} y={88 + row * 17} width="14" height="11" rx="3" fill={row === 0 && col === 8 ? "var(--color-primary)" : "var(--color-surface)"} />))}</>,
+    headphones: <><path d="M93 133v-15a67 67 0 01134 0v15" stroke="var(--color-art-deep)" strokeWidth="19" strokeLinecap="round"/><path d="M93 131v-13a67 67 0 01134 0v13" stroke="var(--color-primary)" strokeWidth="11" strokeLinecap="round"/><rect x="78" y="124" width="32" height="52" rx="14" fill="var(--color-art-light)"/><rect x="210" y="124" width="32" height="52" rx="14" fill="var(--color-art-light)"/></>,
+    plant: <><path d="M160 127c-1-45-24-63-51-66 0 32 14 59 51 66z" fill="var(--color-accent-mint)"/><path d="M160 127c3-46 29-67 54-69 2 37-18 63-54 69z" fill="var(--color-art-light)"/><path d="M160 135V92" stroke="var(--color-art-deep)" strokeWidth="5"/><path d="M118 130h84l-9 53h-66z" fill="var(--color-primary)"/><path d="M115 127h90v11h-90z" fill="var(--color-art-deep)"/></>,
+    stand: <><path d="M90 165l87-73 14 10-66 58h99v14H96z" fill="var(--color-art-light)"/><path d="M106 170h123v11H96z" fill="var(--color-art-deep)"/><path d="M176 90l16 11 25-20-16-12z" fill="var(--color-primary)"/></>,
+    mat: <><rect x="53" y="80" width="214" height="100" rx="17" fill="var(--color-art-deep)"/><rect x="53" y="73" width="214" height="100" rx="17" fill="var(--color-art-light)"/><rect x="80" y="97" width="84" height="48" rx="6" fill="var(--color-surface)"/><circle cx="213" cy="123" r="19" fill="var(--color-primary)"/></>,
+    organizer: <><path d="M83 115h154l-12 66H95z" fill="var(--color-primary)"/><path d="M83 110h154v12H83z" fill="var(--color-art-deep)"/><path d="M110 110V83h41v27M168 110V68h37v42" stroke="var(--color-art-light)" strokeWidth="11"/><path d="M125 130v34M194 130v34" stroke="var(--color-art-deep)" strokeWidth="4"/></>,
+    clock: <><circle cx="160" cy="121" r="63" fill="var(--color-art-deep)"/><circle cx="160" cy="115" r="63" fill="var(--color-art-light)"/><circle cx="160" cy="115" r="47" fill="var(--color-surface)"/><path d="M160 83v34l24 13" stroke="var(--color-primary)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/><circle cx="160" cy="115" r="5" fill="var(--color-art-deep)"/></>,
+  };
+  return <svg className="product-art" viewBox="0 0 320 240" fill="none" stroke="none" aria-hidden="true" focusable="false">{drawings[art]}</svg>;
+}

@@ -7,6 +7,7 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
 
 export default defineConfig({
   testDir: "./tests/e2e",
+  snapshotPathTemplate: "tests/golden/pages/{arg}{ext}",
   use: { baseURL: `http://127.0.0.1:${port}` },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {

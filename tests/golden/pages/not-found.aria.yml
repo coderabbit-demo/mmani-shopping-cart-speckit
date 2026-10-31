@@ -1,0 +1,27 @@
+- /children: deep-equal
+- banner:
+  - link "DeskDrop":
+    - /url: /
+  - navigation "Main navigation":
+    - link "Shop":
+      - /url: /
+    - link "Wishlist (0)":
+      - /url: /wishlist
+    - link "Orders":
+      - /url: /orders
+    - link "Account":
+      - /url: /account
+    - link "Bag (0)":
+      - /url: /bag
+- main:
+  - text: /\d+ \/ A LITTLE DETOUR/
+  - heading "Page not found" [level=1]
+  - paragraph: This page wandered off. Let’s get you back to the good stuff.
+  - link "Back to the shop":
+    - /url: /
+- contentinfo:
+  - text: DeskDrop.
+  - paragraph: Little things for your big ideas.
+  - text: Built with
+  - img "CodeRabbit"
+- alert
