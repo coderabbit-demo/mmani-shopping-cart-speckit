@@ -216,3 +216,25 @@ for (const [status, destination] of [[404, "/wishlist"], [500, "/wishlist"], [40
     await expect(page.getByRole("heading", { name: "Page not found" })).toHaveCount(0);
   });
 }
+
+test("home heading uses the Geist font family", async ({ page }) => {
+  await page.goto("/");
+  const heading = page.getByRole("heading", { name: "DeskDrop", level: 1 });
+  const fonts = await heading.evaluate((element) => {
+    const style = getComputedStyle(element);
+    const firstFamily = (value: string) => value.split(",")[0].trim().replace(/^["']|["']$/g, "");
+    return {
+      actual: firstFamily(style.fontFamily),
+      geist: firstFamily(style.getPropertyValue("--font-geist")),
+      hack: firstFamily(style.getPropertyValue("--font-hack")),
+    };
+  });
+  expect(fonts.geist).not.toBe("");
+  expect(fonts.actual).toBe(fonts.geist);
+  expect(fonts.actual).not.toBe(fonts.hack);
+});
+
+test("home heading uses semibold weight", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "DeskDrop", level: 1 })).toHaveCSS("font-weight", "600");
+});

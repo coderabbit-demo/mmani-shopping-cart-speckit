@@ -59,7 +59,7 @@ button:disabled { cursor: not-allowed; }
 .hero { min-height: 500px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 30px; padding-block: 68px; }
 .eyebrow { font-family: var(--font-hack), monospace; font-size: 11px; font-weight: 700; letter-spacing: .11em; }
 .eyebrow-dot { display: inline-block; width: 8px; height: 8px; background: var(--color-primary); border-radius: 50%; margin-right: 8px; }
-.hero h1 { font-family: var(--font-hack), monospace; color: var(--color-muted); font-size: 12px; font-weight: 400; margin: 38px 0 12px; }
+.hero h1 { font-family: var(--font-geist), sans-serif; color: var(--color-muted); font-size: 12px; font-weight: 600; margin: 38px 0 12px; }
 .hero-title { margin: 0; font-size: clamp(45px, 6vw, 82px); font-weight: 600; line-height: 1.02; letter-spacing: -.065em; }
 .hero-title em { color: var(--color-primary-text); font-style: normal; }
 .hero-description { max-width: 370px; color: var(--color-muted); line-height: 1.7; margin: 25px 0; font-size: 15px; }
