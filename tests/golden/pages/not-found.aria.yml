@@ -1,3 +1,4 @@
+- /children: deep-equal
 - banner:
   - link "DeskDrop":
     - /url: /

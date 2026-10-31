@@ -26,27 +26,7 @@ for (const scheme of ["dark", "light"] as const) {
     });
     expect(artColors).toEqual([]);
     await expect(page.locator("footer img")).toHaveJSProperty("currentSrc", `${new URL(page.url()).origin}/brand/${scheme === "light" ? "orange" : "white"}-typemark.svg`);
-    for (const locator of [page.getByRole("link", { name: "Shop", exact: true }), page.getByRole("button", { name: "Add Arc desk lamp to bag" })]) {
-      for (let step = 0; step < 80 && !(await locator.evaluate((element) => element === document.activeElement)); step++) {
-        await page.keyboard.press("Tab");
-      }
-      await expect(locator).toBeFocused();
-      const outline = await locator.evaluate((element) => { const style = getComputedStyle(element); return { style: style.outlineStyle, width: style.outlineWidth, color: style.outlineColor }; });
-      expect(outline.style).not.toBe("none");
-      expect(parseFloat(outline.width)).toBeGreaterThan(0);
-      const focusColor = await page.evaluate(() => {
-        const probe = document.createElement("span");
-        probe.style.color = "var(--color-focus)";
-        document.body.append(probe);
-        const color = getComputedStyle(probe).color;
-        probe.remove();
-        return color;
-      });
-      expect(outline.color).toBe(focusColor);
-      for (const background of ["bg", "surface"]) {
-        expect(contrastRatio(outline.color, tokens[background]), `focus/${background}`).toBeGreaterThanOrEqual(3);
-      }
-    }
+
   });
 }
 
@@ -80,6 +60,44 @@ for (const scheme of ["dark", "light"] as const) {
       }, background);
       for (const color of [colors.search, colors.select]) {
         expect(contrastRatio(color, colors.background)).toBeGreaterThanOrEqual(3);
+      }
+    });
+  }
+}
+
+for (const scheme of ["dark", "light"] as const) {
+  for (const [name, role, label] of [["header", "link", "Shop"], ["card", "button", "Add Arc desk lamp to bag"]] as const) {
+    test(`${scheme} ${name} focus uses primary outline and contrasting ring`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme: scheme });
+      await page.goto("/");
+      const locator = page.getByRole(role, { name: label, exact: true });
+      for (let step = 0; step < 80 && !(await locator.evaluate((element) => element === document.activeElement)); step++) {
+        await page.keyboard.press("Tab");
+      }
+      await expect(locator).toBeFocused();
+      const values = await locator.evaluate((element) => {
+        const style = getComputedStyle(element);
+        const root = getComputedStyle(document.documentElement);
+        const probe = document.createElement("span");
+        document.body.append(probe);
+        const token = (name: string) => {
+          probe.style.color = `var(--color-${name})`;
+          return getComputedStyle(probe).color;
+        };
+        const result = { outline: style.outlineColor, outlineStyle: style.outlineStyle, outlineWidth: style.outlineWidth, outlineOffset: style.outlineOffset, shadow: style.boxShadow, primary: token("primary"), focus: token("focus"), bg: root.getPropertyValue("--color-bg").trim(), surface: root.getPropertyValue("--color-surface").trim() };
+        probe.remove();
+        return result;
+      });
+      expect(values.outlineStyle).not.toBe("none");
+      expect(parseFloat(values.outlineWidth)).toBeGreaterThan(0);
+      expect(values.outline).toBe(values.primary);
+      const ring = /^(rgb\([^)]*\)) 0px 0px 0px ([\d.]+)px$/.exec(values.shadow);
+      expect(ring, "expected an adjacent solid focus ring").not.toBeNull();
+      expect(ring![1]).toBe(values.focus);
+      expect(Number(ring![2])).toBeGreaterThan(0);
+      expect(Number(ring![2])).toBe(parseFloat(values.outlineOffset));
+      for (const background of [values.bg, values.surface]) {
+        expect(contrastRatio(ring![1], background)).toBeGreaterThanOrEqual(3);
       }
     });
   }
