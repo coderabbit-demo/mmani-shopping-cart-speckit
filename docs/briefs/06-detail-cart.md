@@ -13,6 +13,7 @@ Implement tasks T001–T013 of `specs/003-product-detail-cart/tasks.md`. Mark ea
 
 - PR 5 is merged; `useStore()` exposes every member in `specs/002-storefront-browse/contracts/store-provider.md`.
 - Next.js 16.4.3 passes route `params` as a Promise (research.md R1).
+- PR 5b is merged: the header "Bag (<n>)" link points to `/cart` (`components/shell.tsx`), so e2e can reach `/cart` through it without changing the shell (FR-008).
 
 ## Goal
 
