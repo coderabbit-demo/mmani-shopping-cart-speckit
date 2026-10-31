@@ -1,13 +1,13 @@
-# Run 2 report (2026-10-31, 06:30 UTC)
+# Run 2 report (2026-10-31, 07:00 UTC)
 
 ## Where it stands
 
-- **All 9 lane-map PRs are merged**, plus one follow-up (5b) and two docs PRs. Every merge went
+- **All 9 lane-map PRs are merged**, plus two follow-ups (5b and 9b) and two docs PRs. Every merge went
   through `scripts/golden/strict-gate.sh`:
   - CodeRabbit approved the exact head, no thread was open, and CI was green.
   - The maintainer merged PRs #2, #3, #4 and #6, and docs PR #1.
   - From 03:03 UTC the maintainer authorized the orchestrator to merge gated PRs. It then merged
-    #7, #8, #9, #10, #11, #12 and #13 with `--match-head-commit`.
+    #7, #8, #9, #10, #11, #12, #13 and #15 with `--match-head-commit`.
 - **Jira:** SC-26 through SC-34 are Done. The post-merge automation never moved a ticket, so each
   one was moved by hand (PLAYBOOK step 11).
 - **Code writing:** every product change came from the Coding Agent. The orchestrator wrote only
@@ -29,6 +29,7 @@ Elapsed time runs from the first task start to the merge. Wait times are include
 | 7 persistence | #10 | 101 | 70 | 11 | 1 |
 | 8 checkout | #12 | 28 | 0 | 8 | 0 |
 | 9 account | #13 | 48 | 0 | 19 | 1 |
+| 9b success golden | #15 | 20 | 0 | 6 | 0 |
 
 Notes:
 - PR 2's 714 minutes include a 6 h 23 min pause while the Coding Agent was down (13:43 to 20:06).
@@ -67,8 +68,10 @@ Notes:
    `main`, so the approval is lost. It cost two maintainer approvals (docs PR #1, PR #4). After
    that, the orchestrator merged `main` into each branch before opening it, and the problem did
    not recur.
-5. **One aria snapshot flakes under load.** Either the checkout or the filled-cart golden fails in
-   about 1 of 3 full local runs and passes on rerun. CI stayed green. It needs a follow-up fix.
+5. **One aria snapshot flaked.** The checkout-success golden pinned Next.js's route announcer, which
+   Next fills on its own timing. It failed this docs PR's CI twice; with a 20-run repeat, main passed
+   13 of 20. PR 9b (#15) scoped the snapshot to `.site`, and the head then passed 20 of 20 and three
+   full runs.
 6. **`/speckit-converge` was not run after each merge**, though PR-MAP asks for it. It should run
    once per spec now.
 
