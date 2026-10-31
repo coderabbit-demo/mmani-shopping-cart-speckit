@@ -14,9 +14,9 @@ description: "Task list for account, wishlist, persistence and demo reset"
 
 ## Phase 1: Foundational — storage module (US2 logic) · PR 7
 
-- [ ] T001 [US2] Write `tests/persistence.test.mjs`: round-trip of a full state; every corrupt case in US2 scenarios 1, 2, 4 and 5 and research.md R2 (non-string, oversize, invalid JSON, wrong version, each bad field including every order and session field); `couponNotice` not restored; `createStorage` falls back to memory when the getter or any call throws, and `save` then `load` returns the value; no password in the serialized output of a signed-in state
-- [ ] T002 [US2] Create `lib/persistence.ts` per contracts/persistence.md
-- [ ] T003 Run `npm run typecheck`, `npm test` and `npm run golden:check`; all pass
+- [x] T001 [US2] Write `tests/persistence.test.mjs`: round-trip of a full state; every corrupt case in US2 scenarios 1, 2, 4 and 5 and research.md R2 (non-string, oversize, invalid JSON, wrong version, each bad field including every order and session field); `couponNotice` not restored; `createStorage` falls back to memory when the getter or any call throws, and `save` then `load` returns the value; no password in the serialized output of a signed-in state
+- [x] T002 [US2] Create `lib/persistence.ts` per contracts/persistence.md
+- [x] T003 Run `npm run typecheck`, `npm test` and `npm run golden:check`; all pass
 
 ---
 
