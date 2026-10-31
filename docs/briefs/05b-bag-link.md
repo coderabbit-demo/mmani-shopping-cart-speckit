@@ -27,7 +27,7 @@ Check this brief against the code on `main`. If any assumption is false, or a ta
 
 ## Red-then-green
 
-`tests/e2e/storefront.spec.ts`: assert that the header bag link's `href` is `/cart`. It must be red on main and green on the head. Update line 137 to `/cart`.
+`tests/e2e/storefront.spec.ts`: assert that the header bag link's `href` is `/cart`. It must be red on main and green on the head. Update line 137 to `/cart`, and add `cart` to that test's `page.route` matcher (`/\/(wishlist|orders|account|bag)(?:\?|$)/`). There is no `/cart` route before PR 6, so without the matcher change the click would not be rewritten to `/`.
 
 ## CLI review
 
