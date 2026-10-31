@@ -68,4 +68,4 @@ PR 7 (Phase 1) any time after PR 2. PR 9: T004–T005 first (persistence wiring)
 
 ## Phase 8: Convergence
 
-- [ ] T016 Skip the post-hydration save in `components/store-provider.tsx` when `storage.load()` returns nothing, so `deskdrop-demo-v1` stays absent after a reset and a full reload until the shopper changes state, and add a `tests/e2e/account-persistence.spec.ts` step that resets on `/demo`, calls `page.reload()` and asserts the key is still absent per research R1 and US5/AC1 (contradicts)
+- [x] T016 Skip the post-hydration save in `components/store-provider.tsx` when `storage.load()` returns nothing, so `deskdrop-demo-v1` stays absent after a reset and a full reload until the shopper changes state, and add a `tests/e2e/account-persistence.spec.ts` step that resets on `/demo`, calls `page.reload()` and asserts the key is still absent per research R1 and US5/AC1 (contradicts)
