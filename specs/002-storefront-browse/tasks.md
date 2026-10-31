@@ -79,4 +79,4 @@ description: "Task list for the storefront shell and browse"
 
 ## Phase 8: Convergence
 
-- [ ] T023 Extend the quick-add test in `tests/e2e/storefront.spec.ts` to assert that two quick-adds of the Arc desk lamp leave exactly one bag line, Terracotta, quantity 2, per US2/AC1 and SC-004 (partial)
+- [x] T023 Extend the quick-add test in `tests/e2e/storefront.spec.ts` to assert that two quick-adds of the Arc desk lamp leave exactly one bag line, Terracotta, quantity 2, per US2/AC1 and SC-004 (partial)

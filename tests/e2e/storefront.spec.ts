@@ -62,6 +62,15 @@ test("quick add, wishlist, quantity cap and navigation retain state", async ({ p
   await add.click();
   await add.click();
   await expect(page.getByRole("link", { name: "Bag (2)" })).toBeVisible();
+  await page.getByRole("link", { name: "Bag (2)" }).click();
+  await expect(page.getByRole("heading", { name: "Your bag" })).toBeVisible();
+  const lines = page.locator("main li");
+  await expect(lines).toHaveCount(1);
+  await expect(lines.getByRole("link", { name: "Arc desk lamp", exact: true })).toBeVisible();
+  await expect(lines.getByText("Color: Terracotta", { exact: true })).toBeVisible();
+  await expect(lines.getByLabel("Quantity", { exact: true })).toHaveValue("2");
+  await page.goBack();
+  await expect(page.getByRole("heading", { name: "DeskDrop", level: 1 })).toBeVisible();
   await expect(page.locator("article").getByText(/In bag:/)).toHaveCount(0);
   for (let i = 0; i < 10; i++) await add.click();
   await expect(page.getByRole("link", { name: "Bag (10)" })).toBeVisible();
