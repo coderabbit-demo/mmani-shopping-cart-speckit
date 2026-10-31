@@ -55,6 +55,7 @@ test("browse products with search, filters, sorting and reset", async ({ page })
 });
 
 test("quick add, wishlist, quantity cap and navigation retain state", async ({ page }) => {
+  await page.route("**/products/arc-desk-lamp", (route) => route.fulfill({ status: 404 }));
   await page.goto("/");
   const lamp = card(page, "Arc desk lamp");
   const add = lamp.getByRole("button", { name: "Add Arc desk lamp to bag" });
@@ -126,6 +127,7 @@ test.describe("without JavaScript", () => {
 });
 
 test("synthetic 404 followed by Wishlist then Shop restores home", async ({ page }) => {
+  await page.route("**/products/arc-desk-lamp", (route) => route.fulfill({ status: 404 }));
   await page.route(/\/(wishlist|orders|account|bag|cart)(?:\?|$)/, async (route) => {
     const destination = new URL(route.request().url());
     destination.pathname = "/";
@@ -152,6 +154,7 @@ test("synthetic 404 followed by Wishlist then Shop restores home", async ({ page
 });
 
 test("Shop from a synthetic 404 restores home and preserves counts", async ({ page }) => {
+  await page.route("**/products/arc-desk-lamp", (route) => route.fulfill({ status: 404 }));
   await page.goto("/");
   const lamp = card(page, "Arc desk lamp");
   await lamp.getByRole("button", { name: "Add Arc desk lamp to bag" }).click();

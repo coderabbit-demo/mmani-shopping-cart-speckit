@@ -1,0 +1,8 @@
+.summary { border: 1px solid var(--color-border); background: var(--color-surface); padding: 24px; border-radius: 6px; }
+.summary h2 { margin: 0 0 20px; font-size: 20px; font-weight: 600; }
+.summary dl { margin: 0; }
+.summary dl > div { display: flex; justify-content: space-between; gap: 16px; margin-block: 14px; }
+.summary dt { color: var(--color-muted); font: 700 12px var(--font-hack), monospace; }
+.summary dd { margin: 0; font: 400 14px var(--font-hack), monospace; }
+.summary .total { border-top: 1px solid var(--color-border); margin: 20px 0 0; padding-top: 20px; }
+.summary .total dt, .summary .total dd { color: var(--color-text); }

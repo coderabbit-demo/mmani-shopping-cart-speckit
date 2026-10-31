@@ -47,3 +47,27 @@ test("snapshot child matching rejects an extra button", async ({ page }, testInf
   await expect(body).toMatchAriaSnapshot(`- /children: contain\n${snapshot.slice(strictChildren.length)}`);
   await expect(body).not.toMatchAriaSnapshot(snapshot);
 });
+
+
+test("@golden product detail accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/products/arc-desk-lamp");
+  await expect(page.getByRole("button", { name: "Add to bag", exact: true })).toBeEnabled();
+  await matchPageSnapshot(page, testInfo, "product-arc-desk-lamp.aria.yml");
+});
+
+test("@golden empty cart accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/cart");
+  await expect(page.getByText("Your bag is empty.")).toBeVisible();
+  await matchPageSnapshot(page, testInfo, "cart-empty.aria.yml");
+});
+
+test("@golden filled cart accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/products/arc-desk-lamp");
+  await page.getByRole("radio", { name: "Sage" }).check();
+  await page.getByLabel("Quantity", { exact: true }).fill("2");
+  await page.getByLabel("Quantity", { exact: true }).blur();
+  await page.getByRole("button", { name: "Add to bag", exact: true }).click();
+  await page.getByRole("link", { name: "Bag (2)" }).click();
+  await expect(page.getByText("Color: Sage")).toBeVisible();
+  await matchPageSnapshot(page, testInfo, "cart-filled.aria.yml");
+});

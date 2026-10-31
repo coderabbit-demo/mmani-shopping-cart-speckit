@@ -1,0 +1,6 @@
+.field { display: grid; gap: 8px; font-size: 13px; }
+.controls { display: inline-flex; width: fit-content; border: 1px solid var(--color-border); border-radius: 4px; overflow: visible; }
+.controls button, .controls input { border: 0; background: var(--color-surface); color: var(--color-text); height: 42px; text-align: center; }
+.controls button { width: 42px; font-size: 18px; }
+.controls button:disabled { color: var(--color-muted); }
+.controls input { width: 48px; font-family: var(--font-hack), monospace; border-inline: 1px solid var(--color-border); cursor: text; }

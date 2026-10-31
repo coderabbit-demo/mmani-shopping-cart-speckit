@@ -1,0 +1,57 @@
+- /children: deep-equal
+- banner:
+  - link "DeskDrop":
+    - /url: /
+  - navigation "Main navigation":
+    - link "Shop":
+      - /url: /
+    - link "Wishlist (0)":
+      - /url: /wishlist
+    - link "Orders":
+      - /url: /orders
+    - link "Account":
+      - /url: /account
+    - link "Bag (2)":
+      - /url: /cart
+- main:
+  - heading "Your bag" [level=1]
+  - list:
+    - listitem:
+      - heading "Arc desk lamp" [level=2]:
+        - link "Arc desk lamp":
+          - /url: /products/arc-desk-lamp
+      - paragraph: "Color: Sage"
+      - paragraph: $68 each
+      - text: Quantity
+      - button "Decrease quantity": −
+      - textbox "Quantity": "2"
+      - button "Increase quantity": +
+      - button "Remove Arc desk lamp (Sage)": Remove
+      - paragraph: $136
+  - text: Discount code
+  - textbox "Discount code"
+  - button "Apply"
+  - status
+  - group "Delivery":
+    - text: Delivery
+    - radio "Standard — Free" [checked]
+    - text: Standard — Free
+    - radio "Express — $12"
+    - text: Express — $12
+  - complementary:
+    - region "Order summary":
+      - heading "Order summary" [level=2]
+      - term: Subtotal
+      - definition: $136
+      - term: Delivery
+      - definition: Free
+      - term: Total
+      - definition: $136
+    - link "Checkout":
+      - /url: /checkout
+- contentinfo:
+  - text: DeskDrop.
+  - paragraph: Little things for your big ideas.
+  - text: Built with
+  - img "CodeRabbit"
+- alert
