@@ -1,0 +1,4 @@
+.page { padding-block: 64px 100px; }
+.page h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 600; letter-spacing: -.05em; margin: 0 0 32px; }
+.empty { padding: 50px; border: 1px solid var(--color-border); text-align: center; }
+.empty a { color: var(--color-primary-text); text-decoration: underline; }

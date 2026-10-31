@@ -22,43 +22,43 @@ description: "Task list for account, wishlist, persistence and demo reset"
 
 ## Phase 2: User Story 1 — Survive a reload (P1) · PR 9
 
-- [ ] T004 [US1] Write e2e for US1 scenarios 1–4 in `tests/e2e/account-persistence.spec.ts`, including reloads of `/cart`, `/checkout` and `/checkout/success` asserting "Your bag is empty." and "No recent order." never appear
-- [ ] T005 [US1] Update `components/store-provider.tsx`: load after mount, save after changes once hydrated, set `hydrated`, and make `resetAll()` clear storage and skip the next save (research.md R1); member signatures unchanged
+- [x] T004 [US1] Write e2e for US1 scenarios 1–4 in `tests/e2e/account-persistence.spec.ts`, including reloads of `/cart`, `/checkout` and `/checkout/success` asserting "Your bag is empty." and "No recent order." never appear
+- [x] T005 [US1] Update `components/store-provider.tsx`: load after mount, save after changes once hydrated, set `hydrated`, and make `resetAll()` clear storage and skip the next save (research.md R1); member signatures unchanged
 
 ---
 
 ## Phase 3: User Story 2 — Bad or missing storage in the browser (P1) · PR 9
 
-- [ ] T006 [US2] Add e2e for US2 scenarios 1–5 to `tests/e2e/account-persistence.spec.ts` (research.md R4), including the full journey with storage disabled
+- [x] T006 [US2] Add e2e for US2 scenarios 1–5 to `tests/e2e/account-persistence.spec.ts` (research.md R4), including the full journey with storage disabled
 
 ---
 
 ## Phase 4: User Story 3 — Sign in and keep the wishlist (P1, rule 5) · PR 9
 
-- [ ] T007 [US3] Add e2e for US3 scenarios 1–7 to `tests/e2e/account-persistence.spec.ts`
-- [ ] T008 [US3] Create `app/account/page.tsx` and `components/account-panel.tsx` + `.module.css` per contracts/ui-copy.md, with `method="post"` and submit disabled until `hydrated` (FR-009)
+- [x] T007 [US3] Add e2e for US3 scenarios 1–7 to `tests/e2e/account-persistence.spec.ts`
+- [x] T008 [US3] Create `app/account/page.tsx` and `components/account-panel.tsx` + `.module.css` per contracts/ui-copy.md, with `method="post"` and submit disabled until `hydrated` (FR-009)
 
 ---
 
 ## Phase 5: User Story 4 — Wishlist page (P2) · PR 9
 
-- [ ] T009 [US4] Add e2e for US4 scenarios 1–2 to `tests/e2e/account-persistence.spec.ts`
-- [ ] T010 [US4] Create `app/wishlist/page.tsx` and `components/wishlist-view.tsx` + `.module.css`, reusing `components/product-card.tsx` without editing it
+- [x] T009 [US4] Add e2e for US4 scenarios 1–2 to `tests/e2e/account-persistence.spec.ts`
+- [x] T010 [US4] Create `app/wishlist/page.tsx` and `components/wishlist-view.tsx` + `.module.css`, reusing `components/product-card.tsx` without editing it
 
 ---
 
 ## Phase 6: User Story 5 — Reset the demo (P2) · PR 9
 
-- [ ] T011 [US5] Add e2e for US5 scenarios 1–2 to `tests/e2e/account-persistence.spec.ts` (accept and dismiss the dialog; after reset, the key is still absent after one more navigation)
-- [ ] T012 [US5] Create `app/demo/page.tsx` and `components/demo-reset.tsx` + `.module.css` (calls `resetAll()` only; the provider clears storage)
+- [x] T011 [US5] Add e2e for US5 scenarios 1–2 to `tests/e2e/account-persistence.spec.ts` (accept and dismiss the dialog; after reset, the key is still absent after one more navigation)
+- [x] T012 [US5] Create `app/demo/page.tsx` and `components/demo-reset.tsx` + `.module.css` (calls `resetAll()` only; the provider clears storage)
 
 ---
 
 ## Phase 7: User Story 6 — Pinned pages (P3) · PR 9
 
-- [ ] T013 [US6] Add `@golden` aria snapshots of guest `/account`, empty `/wishlist` and `/demo` to `tests/e2e/pages.golden.spec.ts`
-- [ ] T014 [US6] Run `npm run golden:capture:pages`; only the three new files appear; every earlier golden is byte-identical
-- [ ] T015 Run `npm run typecheck`, `npm test`, `npm run golden:check` and `npm run test:e2e`; all pass
+- [x] T013 [US6] Add `@golden` aria snapshots of guest `/account`, empty `/wishlist` and `/demo` to `tests/e2e/pages.golden.spec.ts`
+- [x] T014 [US6] Run `npm run golden:capture:pages`; only the three new files appear; every earlier golden is byte-identical
+- [x] T015 Run `npm run typecheck`, `npm test`, `npm run golden:check` and `npm run test:e2e`; all pass
 
 ---
 
