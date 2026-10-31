@@ -38,3 +38,20 @@ for (const scheme of ["dark", "light"] as const) {
     }
   });
 }
+
+for (const scheme of ["dark", "light"] as const) {
+  for (const [name, selector] of [["wordmark", ".wordmark span"], ["section heading", ".section-heading h2 span"], ["navigation hover", ".site-nav a"]] as const) {
+    test(`${scheme} ${name} text has AA contrast`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme: scheme });
+      await page.goto("/");
+      await page.addStyleTag({ content: "*, *::before, *::after { transition: none !important; }" });
+      const element = page.locator(selector).first();
+      if (name === "navigation hover") await element.hover();
+      const [color, background] = await Promise.all([
+        element.evaluate((node) => getComputedStyle(node).color),
+        page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--color-bg").trim()),
+      ]);
+      expect(contrastRatio(color, background)).toBeGreaterThanOrEqual(4.5);
+    });
+  }
+}

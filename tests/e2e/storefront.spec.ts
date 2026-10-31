@@ -24,6 +24,7 @@ test("browse products with search, filters, sorting and reset", async ({ page })
   await page.getByLabel("Search products").fill("  LAMP  ");
   await expect(page.locator("article")).toHaveCount(1);
   await expect(page.getByRole("status")).toHaveText("1 product");
+  await expect(page.getByRole("status")).toHaveAttribute("aria-live", "polite");
   await page.getByLabel("Search products").fill("");
   await page.getByLabel("Category").selectOption({ label: "Desk essentials" });
   await expect(page.locator("article")).toHaveCount(3);
@@ -60,6 +61,7 @@ test("quick add, wishlist, quantity cap and navigation retain state", async ({ p
   await add.click();
   await add.click();
   await expect(page.getByRole("link", { name: "Bag (2)" })).toBeVisible();
+  await expect(lamp.getByText("In bag: Terracotta × 2", { exact: true })).toBeVisible();
   for (let i = 0; i < 10; i++) await add.click();
   await expect(page.getByRole("link", { name: "Bag (10)" })).toBeVisible();
   await expect(card(page, "Slow time clock").getByRole("button", { name: "Sold out" })).toBeDisabled();
@@ -78,7 +80,9 @@ test("quick add, wishlist, quantity cap and navigation retain state", async ({ p
   await page.getByRole("link", { name: "Shop", exact: true }).click();
   await expect(page.getByRole("link", { name: "Bag (10)" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Wishlist (1)" })).toBeVisible();
-  await card(page, "Arc desk lamp").getByRole("button", { name: "Save Arc desk lamp to wishlist" }).click();
+  const restoredSave = card(page, "Arc desk lamp").getByRole("button", { name: "Save Arc desk lamp to wishlist" });
+  await restoredSave.click();
+  await expect(restoredSave).toHaveAttribute("aria-pressed", "false");
   await expect(page.getByRole("link", { name: "Wishlist (0)" })).toBeVisible();
 });
 
@@ -102,6 +106,9 @@ test("mobile menu and both pages fit the viewport", async ({ page }) => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375);
     const menu = page.getByRole("button", { name: "Menu" });
     await expect(menu).toHaveAttribute("aria-expanded", "false");
+    for (const link of ["Shop", "Wishlist (0)", "Orders", "Account", "Bag (0)"]) {
+      await expect(page.locator("#site-nav").getByRole("link", { name: link, exact: true, includeHidden: true })).toBeHidden();
+    }
     await menu.click();
     await expect(menu).toHaveAttribute("aria-expanded", "true");
     await expect(page.getByRole("link", { name: "Shop", exact: true })).toBeVisible();
@@ -115,4 +122,45 @@ test.describe("without JavaScript", () => {
     await expect(page.locator("article")).toHaveCount(8);
     await expect(card(page, "Arc desk lamp").getByRole("link", { name: "Arc desk lamp", exact: true })).toHaveAttribute("href", "/products/arc-desk-lamp");
   });
+});
+
+test("synthetic 404 followed by Wishlist then Shop restores home", async ({ page }) => {
+  await page.route(/\/(wishlist|orders|account|bag)(?:\?|$)/, async (route) => {
+    const destination = new URL(route.request().url());
+    destination.pathname = "/";
+    await route.continue({ url: destination.toString() });
+  });
+  await page.goto("/");
+  const lamp = card(page, "Arc desk lamp");
+  await lamp.getByRole("button", { name: "Add Arc desk lamp to bag" }).click();
+  await lamp.getByRole("button", { name: "Save Arc desk lamp to wishlist" }).click();
+  for (const [name, destination] of [["Wishlist (1)", "/wishlist"], ["Orders", "/orders"], ["Account", "/account"], ["Bag (1)", "/bag"]]) {
+    await lamp.getByRole("link", { name: "Arc desk lamp", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+    await page.getByRole("link", { name, exact: true }).click();
+    await expect(page).toHaveURL(destination);
+    await expect(page.getByRole("heading", { name: "DeskDrop", level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Page not found" })).toHaveCount(0);
+    await page.getByRole("link", { name: "Shop", exact: true }).click();
+    await expect(page).toHaveURL("/");
+    await expect(page.getByRole("heading", { name: "DeskDrop", level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Page not found" })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Bag (1)" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Wishlist (1)" })).toBeVisible();
+  }
+});
+
+test("Shop from a synthetic 404 restores home and preserves counts", async ({ page }) => {
+  await page.goto("/");
+  const lamp = card(page, "Arc desk lamp");
+  await lamp.getByRole("button", { name: "Add Arc desk lamp to bag" }).click();
+  await lamp.getByRole("button", { name: "Save Arc desk lamp to wishlist" }).click();
+  await lamp.getByRole("link", { name: "Arc desk lamp", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+  await page.getByRole("link", { name: "Shop", exact: true }).click();
+  await expect(page).toHaveURL("/");
+  await expect(page.getByRole("heading", { name: "DeskDrop", level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Page not found" })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Bag (1)" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Wishlist (1)" })).toBeVisible();
 });

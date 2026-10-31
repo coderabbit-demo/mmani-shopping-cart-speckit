@@ -51,7 +51,7 @@
       - link "Arc desk lamp":
         - /url: /products/arc-desk-lamp
     - paragraph: A little light. A lot of focus.
-    - text: /\$\d+/
+    - text: $68
     - button "Add Arc desk lamp to bag": Add to bag
   - article:
     - text: New arrival
@@ -61,7 +61,7 @@
       - link "Form mechanical keyboard":
         - /url: /products/form-mechanical-keyboard
     - paragraph: Make every word feel good.
-    - text: /\$\d+/
+    - text: $94
     - button "Add Form mechanical keyboard to bag": Add to bag
   - article:
     - button "Save Hush wireless headphones to wishlist"
@@ -70,7 +70,7 @@
       - link "Hush wireless headphones":
         - /url: /products/hush-wireless-headphones
     - paragraph: Find your own little world.
-    - text: /\$\d+/
+    - text: $129
     - button "Add Hush wireless headphones to bag": Add to bag
   - article:
     - text: A fan favorite
@@ -80,7 +80,7 @@
       - link "Little green companion":
         - /url: /products/little-green-companion
     - paragraph: Room for something living.
-    - text: /\$\d+/
+    - text: $24
     - button "Add Little green companion to bag": Add to bag
   - article:
     - button "Save Rise laptop stand to wishlist"
@@ -89,7 +89,7 @@
       - link "Rise laptop stand":
         - /url: /products/rise-laptop-stand
     - paragraph: A fresh perspective on work.
-    - text: /\$\d+/
+    - text: $56
     - button "Add Rise laptop stand to bag": Add to bag
   - article:
     - button "Save Everyday desk mat to wishlist"
@@ -98,7 +98,7 @@
       - link "Everyday desk mat":
         - /url: /products/everyday-desk-mat
     - paragraph: Set the tone for your day.
-    - text: /\$\d+/
+    - text: $38
     - button "Add Everyday desk mat to bag": Add to bag
   - article:
     - button "Save Tidy desk organizer to wishlist"
@@ -107,7 +107,7 @@
       - link "Tidy desk organizer":
         - /url: /products/tidy-desk-organizer
     - paragraph: A home for the small things.
-    - text: /\$\d+/
+    - text: $32
     - button "Add Tidy desk organizer to bag": Add to bag
   - article:
     - button "Save Slow time clock to wishlist"
@@ -116,7 +116,7 @@
       - link "Slow time clock":
         - /url: /products/slow-time-clock
     - paragraph: Time, at a gentler pace.
-    - text: /\$\d+/
+    - text: $42
     - button "Sold out" [disabled]
 - contentinfo:
   - text: DeskDrop.

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import NotFound from "../app/not-found";
 import { ShoppingBag } from "lucide-react";
@@ -8,6 +9,7 @@ import { useStore } from "./store-provider";
 
 export function Shell({ children }: { children: ReactNode }) {
   const { bagCount, wishlistCount } = useStore();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [missingProduct, setMissingProduct] = useState(false);
   useEffect(() => {
@@ -28,7 +30,13 @@ export function Shell({ children }: { children: ReactNode }) {
     setMenuOpen(false);
     if (missingProduct && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0) {
       event.preventDefault();
-      window.history.pushState({}, "", "/");
+      setMissingProduct(false);
+      router.push("/");
+    }
+  }
+  function leaveMissing(event: React.MouseEvent<HTMLAnchorElement>) {
+    setMenuOpen(false);
+    if (!event.defaultPrevented && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0) {
       setMissingProduct(false);
     }
   }
@@ -39,10 +47,10 @@ export function Shell({ children }: { children: ReactNode }) {
         <button className="menu-button" type="button" aria-expanded={menuOpen} aria-controls="site-nav" onClick={() => setMenuOpen(!menuOpen)}>Menu <span aria-hidden="true">{menuOpen ? "−" : "+"}</span></button>
         <nav id="site-nav" aria-label="Main navigation" className={menuOpen ? "site-nav is-open" : "site-nav"}>
           <Link href="/" onClick={goHome}>Shop</Link>
-          <Link href="/wishlist" onClick={() => setMenuOpen(false)}>Wishlist ({wishlistCount})</Link>
-          <Link href="/orders" onClick={() => setMenuOpen(false)}>Orders</Link>
-          <Link href="/account" onClick={() => setMenuOpen(false)}>Account</Link>
-          <Link className="bag-link" href="/bag" onClick={() => setMenuOpen(false)}><ShoppingBag aria-hidden="true" size={17} /> Bag ({bagCount})</Link>
+          <Link href="/wishlist" onClick={leaveMissing}>Wishlist ({wishlistCount})</Link>
+          <Link href="/orders" onClick={leaveMissing}>Orders</Link>
+          <Link href="/account" onClick={leaveMissing}>Account</Link>
+          <Link className="bag-link" href="/bag" onClick={leaveMissing}><ShoppingBag aria-hidden="true" size={17} /> Bag ({bagCount})</Link>
         </nav>
       </div>
     </header>
