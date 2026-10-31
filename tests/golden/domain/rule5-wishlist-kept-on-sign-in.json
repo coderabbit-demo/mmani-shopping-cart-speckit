@@ -1,0 +1,32 @@
+{
+  "guest": {
+    "cart": [],
+    "coupon": null,
+    "couponNotice": null,
+    "delivery": "standard",
+    "wishlist": [
+      "arc-desk-lamp",
+      "form-mechanical-keyboard"
+    ],
+    "session": null,
+    "orders": []
+  },
+  "result": {
+    "ok": true,
+    "state": {
+      "cart": [],
+      "coupon": null,
+      "couponNotice": null,
+      "delivery": "standard",
+      "wishlist": [
+        "arc-desk-lamp",
+        "form-mechanical-keyboard"
+      ],
+      "session": {
+        "name": "Alex",
+        "email": "alex@deskdrop.demo"
+      },
+      "orders": []
+    }
+  }
+}
