@@ -9,7 +9,7 @@
 ## R2. Fonts
 
 - **Decision**: Geist via `next/font/google` (weights 400 and 600) as `--font-geist`; Hack via `next/font/local` from `public/fonts/Hack-Regular.woff2` and `Hack-Bold.woff2` as `--font-hack`, with the upstream license in `public/fonts/LICENSE.md`.
-- **Rationale**: BRAND.md; no npm font package. The build must still succeed offline (Next.js falls back to system fonts if Google Fonts is unreachable; pre-flight confirms the behavior on Next 16.4.3).
+- **Rationale**: BRAND.md; no npm font package. Next.js 16.4.3 fails the build when Google Fonts is unreachable (confirmed in the PR 5 pre-flight), so `npm run build` needs network access to fonts.googleapis.com and fonts.gstatic.com. CI, the QA Agent environment and local e2e runs have it; an offline build is not required.
 
 ## R3. Contrast check
 

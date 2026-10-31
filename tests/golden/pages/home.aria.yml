@@ -1,0 +1,127 @@
+- /children: deep-equal
+- banner:
+  - link "DeskDrop":
+    - /url: /
+  - navigation "Main navigation":
+    - link "Shop":
+      - /url: /
+    - link "Wishlist (0)":
+      - /url: /wishlist
+    - link "Orders":
+      - /url: /orders
+    - link "Account":
+      - /url: /account
+    - link "Bag (0)":
+      - /url: /cart
+- main:
+  - paragraph: OBJECTS FOR BETTER DAYS
+  - heading "DeskDrop" [level=1]
+  - paragraph:
+    - text: A little joy for
+    - emphasis: your everyday.
+  - paragraph: Thoughtful objects for the spaces where good ideas happen. Make yourself at home.
+  - link "Explore the collection":
+    - /url: "#collection"
+  - paragraph: /THE DESKDROP EDIT \/ \d+/
+  - heading "Find your thing." [level=2]
+  - paragraph: Everyday essentials, a little less ordinary.
+  - text: Search products
+  - searchbox "Search products"
+  - text: Category
+  - combobox "Category":
+    - option "All objects" [selected]
+    - option "Desk essentials"
+    - option "Lighting"
+    - option "Tech accessories"
+    - option "Little extras"
+  - text: Sort by
+  - combobox "Sort by":
+    - option "Featured" [selected]
+    - 'option "Price: low to high"'
+    - 'option "Price: high to low"'
+    - option "Top rated"
+  - checkbox "In stock only"
+  - text: In stock only
+  - status: 8 products
+  - text: CURATED FOR YOU
+  - article:
+    - text: Bestseller
+    - button "Save Arc desk lamp to wishlist"
+    - text: Lighting ★ 4.9
+    - heading "Arc desk lamp" [level=2]:
+      - link "Arc desk lamp":
+        - /url: /products/arc-desk-lamp
+    - paragraph: A little light. A lot of focus.
+    - text: $68
+    - button "Add Arc desk lamp to bag": Add to bag
+  - article:
+    - text: New arrival
+    - button "Save Form mechanical keyboard to wishlist"
+    - text: Tech accessories ★ 4.8
+    - heading "Form mechanical keyboard" [level=2]:
+      - link "Form mechanical keyboard":
+        - /url: /products/form-mechanical-keyboard
+    - paragraph: Make every word feel good.
+    - text: $94
+    - button "Add Form mechanical keyboard to bag": Add to bag
+  - article:
+    - button "Save Hush wireless headphones to wishlist"
+    - text: Tech accessories ★ 4.9
+    - heading "Hush wireless headphones" [level=2]:
+      - link "Hush wireless headphones":
+        - /url: /products/hush-wireless-headphones
+    - paragraph: Find your own little world.
+    - text: $129
+    - button "Add Hush wireless headphones to bag": Add to bag
+  - article:
+    - text: A fan favorite
+    - button "Save Little green companion to wishlist"
+    - text: Little extras ★ 4.7
+    - heading "Little green companion" [level=2]:
+      - link "Little green companion":
+        - /url: /products/little-green-companion
+    - paragraph: Room for something living.
+    - text: $24
+    - button "Add Little green companion to bag": Add to bag
+  - article:
+    - button "Save Rise laptop stand to wishlist"
+    - text: Desk essentials ★ 4.8
+    - heading "Rise laptop stand" [level=2]:
+      - link "Rise laptop stand":
+        - /url: /products/rise-laptop-stand
+    - paragraph: A fresh perspective on work.
+    - text: $56
+    - button "Add Rise laptop stand to bag": Add to bag
+  - article:
+    - button "Save Everyday desk mat to wishlist"
+    - text: Desk essentials ★ 4.8
+    - heading "Everyday desk mat" [level=2]:
+      - link "Everyday desk mat":
+        - /url: /products/everyday-desk-mat
+    - paragraph: Set the tone for your day.
+    - text: $38
+    - button "Add Everyday desk mat to bag": Add to bag
+  - article:
+    - button "Save Tidy desk organizer to wishlist"
+    - text: Desk essentials ★ 4.6
+    - heading "Tidy desk organizer" [level=2]:
+      - link "Tidy desk organizer":
+        - /url: /products/tidy-desk-organizer
+    - paragraph: A home for the small things.
+    - text: $32
+    - button "Add Tidy desk organizer to bag": Add to bag
+  - article:
+    - button "Save Slow time clock to wishlist"
+    - text: Little extras ★ 4.9
+    - heading "Slow time clock" [level=2]:
+      - link "Slow time clock":
+        - /url: /products/slow-time-clock
+    - paragraph: Time, at a gentler pace.
+    - text: $42
+    - button "Sold out" [disabled]
+- contentinfo:
+  - text: DeskDrop.
+  - paragraph: Little things for your big ideas.
+  - text: Built with
+  - img "CodeRabbit"
+- alert
