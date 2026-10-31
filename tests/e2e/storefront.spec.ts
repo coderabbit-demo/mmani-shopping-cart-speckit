@@ -238,3 +238,26 @@ test("home heading uses semibold weight", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "DeskDrop", level: 1 })).toHaveCSS("font-weight", "600");
 });
+
+test("reduced motion disables smooth scrolling", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "smooth");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("html")).toHaveCSS("scroll-behavior", "auto", { timeout: 1000 });
+});
+
+for (const [name, path, selector, weight] of [
+  ["filter label", "/", ".select-field > span", "700"],
+  ["results count", "/", ".results-line [role=status]", "700"],
+  ["card rating", "/", '[aria-label="Rating 4.9 out of 5"]', "700"],
+  ["section heading", "/", ".section-heading h2", "600"],
+  ["card heading", "/", ".card-body h2", "600"],
+  ["not-found heading", "/no-such-page", ".not-found h1", "600"],
+  ["card price", "/", ".price", "400"],
+] as const) {
+  test(`${name} has the brand font weight`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator(selector).first()).toHaveCSS("font-weight", weight, { timeout: 1000 });
+  });
+}
