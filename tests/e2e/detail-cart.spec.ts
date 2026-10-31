@@ -43,6 +43,62 @@ test("rule 1: chosen colors remain separate cart lines", async ({ page }) => {
   await expect(page.getByRole("region", { name: "Order summary" }).getByText("$136").first()).toBeVisible();
 });
 
+test("cart waits for hydration before showing its empty state", async ({ browser, page }) => {
+  const withoutJavaScript = await browser.newContext({ javaScriptEnabled: false });
+  try {
+    const serverPage = await withoutJavaScript.newPage();
+    await serverPage.goto("/cart");
+    await expect(serverPage.getByRole("heading", { name: "Your bag" })).toBeVisible();
+    await expect(serverPage.getByText("Your bag is empty.")).toHaveCount(0);
+    await expect(serverPage.getByRole("link", { name: "Continue shopping" })).toHaveCount(0);
+  } finally {
+    await withoutJavaScript.close();
+  }
+  await page.goto("/cart");
+  await expect(page.getByText("Your bag is empty.")).toBeVisible();
+});
+
+test("product detail announces the real store error for an unavailable color", async ({ page }) => {
+  await page.route("**/products/arc-desk-lamp", async (route) => {
+    const response = await route.fetch();
+    const body = await response.text();
+    expect(body).toContain('value="Sage"');
+    const headers = { ...response.headers() };
+    delete headers["content-encoding"];
+    delete headers["content-length"];
+    await route.fulfill({ response, headers, body: body.replaceAll("Sage", "Mint") });
+  });
+  await openProduct(page);
+  await page.getByRole("radio", { name: "Mint" }).check();
+  await page.getByRole("button", { name: "Add to bag", exact: true }).click();
+  const status = page.getByRole("status");
+  await expect(status).toHaveText("Choose an available color.");
+  await expect(status).toHaveAttribute("aria-live", "polite");
+  await expect(status).not.toHaveText("Added to bag");
+  await expect(page.getByRole("link", { name: "Bag (0)" })).toBeVisible();
+});
+
+test("quantity changes affect only the selected color line", async ({ page }) => {
+  await addLamp(page, "Sage", "2");
+  await page.getByRole("radio", { name: "Terracotta" }).check();
+  await page.getByLabel("Quantity", { exact: true }).fill("1");
+  await page.getByLabel("Quantity", { exact: true }).blur();
+  await page.getByRole("button", { name: "Add to bag", exact: true }).click();
+  await goToBag(page);
+  const sage = page.locator("li").filter({ hasText: "Color: Sage" });
+  const terracotta = page.locator("li").filter({ hasText: "Color: Terracotta" });
+  await expect(sage.getByLabel("Quantity", { exact: true })).toHaveValue("2");
+  await expect(terracotta.getByLabel("Quantity", { exact: true })).toHaveValue("1");
+  await terracotta.getByRole("button", { name: "Increase quantity" }).click();
+  await expect(terracotta.getByLabel("Quantity", { exact: true })).toHaveValue("2");
+  await expect(sage.getByLabel("Quantity", { exact: true })).toHaveValue("2");
+  await expect(terracotta.getByText("$136", { exact: true })).toBeVisible();
+  await expect(sage.getByText("$136", { exact: true })).toBeVisible();
+  const summary = page.getByRole("region", { name: "Order summary" });
+  await expect(summary.locator("div").filter({ hasText: "Subtotal" })).toHaveText("Subtotal$272");
+  await expect(summary.locator("div").filter({ has: page.getByText("Total", { exact: true }) })).toHaveText("Total$272");
+});
+
 test("rule 2: quantities clamp, totals update, and lines can be removed", async ({ page }) => {
   await addLamp(page, "Sage", "1");
   await goToBag(page);
