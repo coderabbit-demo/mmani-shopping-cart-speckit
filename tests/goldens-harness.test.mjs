@@ -119,3 +119,25 @@ test("invalid or duplicate scenario names fail before writing", (t) => {
     assert.deepEqual(readdirSync(files.output), []);
   }
 });
+
+test("domain scenarios contain exactly the required names", async () => {
+  const { scenarios } = await import("../scripts/goldens/scenarios.mjs");
+  const required = [
+    "rule1-two-colors",
+    "rule1-merge-same-color",
+    "rule2-quantity-clamp",
+    "rule2-line-and-subtotal",
+    "rule3-apply-desk15",
+    "rule3-recompute-on-change",
+    "rule3-removed-below-100",
+    "rule3-invalid-code",
+    "rule4-standard-free",
+    "rule4-express-12",
+    "rule4-coupon-and-express",
+    "rule5-wishlist-kept-on-sign-in",
+    "rule6-multi-item-order",
+    "rule6-history-two-orders",
+    "catalog-summary",
+  ];
+  assert.deepEqual(scenarios.map(({ name }) => name).sort(), required.sort());
+});
