@@ -89,6 +89,7 @@ test("quick add, wishlist, quantity cap and navigation retain state", async ({ p
 test("desktop shell and not found response", async ({ page }) => {
   await page.goto("/");
   for (const name of ["Shop", "Wishlist (0)", "Orders", "Account", "Bag (0)"]) await expect(page.getByRole("link", { name, exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Bag (0)", exact: true })).toHaveAttribute("href", "/cart");
   await expect(page.locator("header img")).toHaveCount(0);
   await expect(page.locator("footer")).toContainText("Built with");
   await expect(page.locator("footer").getByAltText("CodeRabbit")).toBeVisible();
@@ -125,7 +126,7 @@ test.describe("without JavaScript", () => {
 });
 
 test("synthetic 404 followed by Wishlist then Shop restores home", async ({ page }) => {
-  await page.route(/\/(wishlist|orders|account|bag)(?:\?|$)/, async (route) => {
+  await page.route(/\/(wishlist|orders|account|bag|cart)(?:\?|$)/, async (route) => {
     const destination = new URL(route.request().url());
     destination.pathname = "/";
     await route.continue({ url: destination.toString() });
@@ -134,7 +135,7 @@ test("synthetic 404 followed by Wishlist then Shop restores home", async ({ page
   const lamp = card(page, "Arc desk lamp");
   await lamp.getByRole("button", { name: "Add Arc desk lamp to bag" }).click();
   await lamp.getByRole("button", { name: "Save Arc desk lamp to wishlist" }).click();
-  for (const [name, destination] of [["Wishlist (1)", "/wishlist"], ["Orders", "/orders"], ["Account", "/account"], ["Bag (1)", "/bag"]]) {
+  for (const [name, destination] of [["Wishlist (1)", "/wishlist"], ["Orders", "/orders"], ["Account", "/account"], ["Bag (1)", "/cart"]]) {
     await lamp.getByRole("link", { name: "Arc desk lamp", exact: true }).click();
     await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
     await page.getByRole("link", { name, exact: true }).click();
