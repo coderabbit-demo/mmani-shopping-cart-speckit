@@ -1,0 +1,44 @@
+- /children: deep-equal
+- banner:
+  - link "DeskDrop":
+    - /url: /
+  - navigation "Main navigation":
+    - link "Shop":
+      - /url: /
+    - link "Wishlist (0)":
+      - /url: /wishlist
+    - link "Orders":
+      - /url: /orders
+    - link "Account":
+      - /url: /account
+    - link "Bag (0)":
+      - /url: /cart
+- main:
+  - heading "Thank you, Alex!" [level=1]
+  - paragraph: /Order DD-\d{6}/
+  - paragraph: /[A-Z][a-z]{2} \d{1,2}, \d{4}/
+  - heading "Items" [level=2]
+  - list:
+    - listitem:
+      - strong: Arc desk lamp
+      - text: "Color: Terracotta · Quantity: 1 $68"
+  - heading "Shipping details" [level=2]
+  - paragraph: Alex Smith alex@example.com 123 Main St Portland, 97201
+  - paragraph: "Delivery: Standard"
+  - region "Order summary":
+    - heading "Order summary" [level=2]
+    - term: Subtotal
+    - definition: $68
+    - term: Delivery
+    - definition: Free
+    - term: Total
+    - definition: $68
+  - paragraph:
+    - link "View orders":
+      - /url: /orders
+- contentinfo:
+  - text: DeskDrop.
+  - paragraph: Little things for your big ideas.
+  - text: Built with
+  - img "CodeRabbit"
+- alert: Thank you, Alex!

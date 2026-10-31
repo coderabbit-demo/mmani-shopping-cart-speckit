@@ -1,0 +1,52 @@
+- /children: deep-equal
+- banner:
+  - link "DeskDrop":
+    - /url: /
+  - navigation "Main navigation":
+    - link "Shop":
+      - /url: /
+    - link "Wishlist (0)":
+      - /url: /wishlist
+    - link "Orders":
+      - /url: /orders
+    - link "Account":
+      - /url: /account
+    - link "Bag (1)":
+      - /url: /cart
+- main:
+  - heading "Checkout" [level=1]
+  - heading "Shipping details" [level=2]
+  - text: Full name
+  - textbox "Full name"
+  - text: Email
+  - textbox "Email"
+  - text: Address
+  - textbox "Address"
+  - text: City
+  - textbox "City"
+  - text: Postal code
+  - textbox "Postal code"
+  - group "Delivery":
+    - text: ""
+    - radio "Standard — Free" [checked]
+    - text: Standard — Free
+    - radio "Express — $12"
+    - text: "Express — $12"
+  - heading "Payment" [level=2]
+  - paragraph: Payment is simulated. No card is charged.
+  - button "Place order"
+  - complementary:
+    - region "Order summary":
+      - heading "Order summary" [level=2]
+      - term: Subtotal
+      - definition: $68
+      - term: Delivery
+      - definition: Free
+      - term: Total
+      - definition: $68
+- contentinfo:
+  - text: DeskDrop.
+  - paragraph: Little things for your big ideas.
+  - text: Built with
+  - img "CodeRabbit"
+- alert
