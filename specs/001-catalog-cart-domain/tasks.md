@@ -38,8 +38,8 @@ description: "Task list for the catalog and cart domain"
 
 ## Phase 2: Foundational — domain types (blocks US2–US7) · PR 2
 
-- [ ] T009 [US2] Create `lib/catalog.ts` exporting `Category`, `Art`, `Product` and `categories` per contracts/domain-api.md
-- [ ] T010 [US3] Create `lib/store.ts` exporting `CartLine`, `StoreState`, `Totals`, `ShippingDetails`, `Order`, `Result`, the constants and messages in contracts/domain-api.md, and `initialState()`; `lib/store.ts` imports from `lib/catalog.ts` with `import type` only (research.md R1)
+- [x] T009 [US2] Create `lib/catalog.ts` exporting `Category`, `Art`, `Product` and `categories` per contracts/domain-api.md
+- [x] T010 [US3] Create `lib/store.ts` exporting `CartLine`, `StoreState`, `Totals`, `ShippingDetails`, `Order`, `Result`, the constants and messages in contracts/domain-api.md, and `initialState()`; `lib/store.ts` imports from `lib/catalog.ts` with `import type` only (research.md R1)
 
 ---
 
@@ -47,44 +47,44 @@ description: "Task list for the catalog and cart domain"
 
 **Independent Test**: `node --experimental-strip-types --test tests/catalog.test.mjs`
 
-- [ ] T011 [P] [US2] Write `tests/catalog.test.mjs` covering US2 scenarios 1–4, including a field-for-field comparison of `products` with `specs/001-catalog-cart-domain/contracts/catalog.json`
-- [ ] T012 [US2] Add `products`, `productById` and `money` to `lib/catalog.ts` (research.md R5)
+- [x] T011 [P] [US2] Write `tests/catalog.test.mjs` covering US2 scenarios 1–4, including a field-for-field comparison of `products` with `specs/001-catalog-cart-domain/contracts/catalog.json`
+- [x] T012 [US2] Add `products`, `productById` and `money` to `lib/catalog.ts` (research.md R5)
 
 ---
 
 ## Phase 4: User Story 3 — Cart lines and quantities (P1, rules 1–2) · PR 2
 
-- [ ] T013 [P] [US3] Write `tests/cart.test.mjs` covering US3 scenarios 1–8, the quantity, missing-line and unit-price (including merge) edge cases, and the two `addItem` error constants
-- [ ] T014 [US3] Implement `clampQuantity`, `addItem`, `changeQuantity`, `removeItem` and `lineTotal` in `lib/store.ts`
+- [x] T013 [P] [US3] Write `tests/cart.test.mjs` covering US3 scenarios 1–8, the quantity, missing-line and unit-price (including merge) edge cases, and the two `addItem` error constants
+- [x] T014 [US3] Implement `clampQuantity`, `addItem`, `changeQuantity`, `removeItem` and `lineTotal` in `lib/store.ts`
 
 ---
 
 ## Phase 5: User Story 4 — DESK15 coupon (P2, rule 3) · PR 2
 
-- [ ] T015 [P] [US4] Write `tests/coupon.test.mjs` covering US4 scenarios 1–7, the "already applied" edge case, and that any `applyCoupon` or `removeCoupon` clears the removal notice, asserting the exact message strings
-- [ ] T016 [US4] Implement `applyCoupon`, `removeCoupon`, the discount in `totals`, and the removal rule inside every cart-changing function in `lib/store.ts`
+- [x] T015 [P] [US4] Write `tests/coupon.test.mjs` covering US4 scenarios 1–7, the "already applied" edge case, and that any `applyCoupon` or `removeCoupon` clears the removal notice, asserting the exact message strings
+- [x] T016 [US4] Implement `applyCoupon`, `removeCoupon`, the discount in `totals`, and the removal rule inside every cart-changing function in `lib/store.ts`
 
 ---
 
 ## Phase 6: User Story 5 — Delivery and totals (P2, rule 4) · PR 2
 
-- [ ] T017 [P] [US5] Write `tests/totals.test.mjs` covering US5 scenarios 1–4 and cent rounding
-- [ ] T018 [US5] Implement `setDelivery` and the delivery fee and total in `totals` in `lib/store.ts`
+- [x] T017 [P] [US5] Write `tests/totals.test.mjs` covering US5 scenarios 1–4 and cent rounding
+- [x] T018 [US5] Implement `setDelivery` and the delivery fee and total in `totals` in `lib/store.ts`
 
 ---
 
 ## Phase 7: User Story 6 — Orders (P2, rule 6) · PR 2
 
-- [ ] T019 [P] [US6] Write `tests/orders.test.mjs` covering US6 scenarios 1–5, with fixed `now` and `orderId`, and asserting the input state is not mutated
-- [ ] T020 [US6] Implement `placeOrder` in `lib/store.ts`
+- [x] T019 [P] [US6] Write `tests/orders.test.mjs` covering US6 scenarios 1–5, with fixed `now` and `orderId`, and asserting the input state is not mutated
+- [x] T020 [US6] Implement `placeOrder` in `lib/store.ts`
 
 ---
 
 ## Phase 8: User Story 7 — Wishlist and demo sign-in (P3, rule 5) · PR 2
 
-- [ ] T021 [P] [US7] Write `tests/account.test.mjs` covering US7 scenarios 1–5
-- [ ] T022 [US7] Implement `toggleWishlist`, `signIn` and `signOut` in `lib/store.ts`; mark `DEMO_ACCOUNT` as fixture-only in its declaration's name or a single doc comment
-- [ ] T023 [US2] Run `npm run typecheck` and `npm test`; every test passes
+- [x] T021 [P] [US7] Write `tests/account.test.mjs` covering US7 scenarios 1–5
+- [x] T022 [US7] Implement `toggleWishlist`, `signIn` and `signOut` in `lib/store.ts`; mark `DEMO_ACCOUNT` as fixture-only in its declaration's name or a single doc comment
+- [x] T023 [US2] Run `npm run typecheck` and `npm test`; every test passes
 
 **Checkpoint**: all six cart rules hold at the domain level.
 
