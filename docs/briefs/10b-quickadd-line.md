@@ -1,6 +1,6 @@
 # Brief 10b — `test: assert two quick-adds give one bag line`
 
-**Mode:** test-only coverage, lane B. Goldens stay byte-identical. **Jira:** none (convergence follow-up)
+**Mode:** test-only coverage, lane B. Goldens stay byte-identical. **Jira:** SC-30 (convergence follow-up to PR 5, the storefront)
 **Read first:** `specs/002-storefront-browse/spec.md` (US2), `specs/002-storefront-browse/tasks.md`, `.specify/memory/constitution.md`, `AGENTS.md`.
 
 ## Tasks in scope
