@@ -82,7 +82,7 @@ button:disabled { cursor: not-allowed; }
 .filter-bar { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; }
 .search-field, .select-field { display: flex; align-items: center; gap: 10px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 5px; min-height: 48px; padding: 0 14px; }
 .search-field { flex: 1 1 240px; color: var(--color-muted); }
-.search-field input { min-width: 0; width: 100%; background: transparent; color: var(--color-text); border: 0; outline-offset: 0; }
+.search-field input { min-width: 0; width: 100%; background: transparent; color: var(--color-text); border: 0; }
 .search-field input::placeholder { color: var(--color-muted); }
 .select-field { gap: 12px; }
 .select-field > span { font: 700 10px var(--font-hack), monospace; color: var(--color-muted); }

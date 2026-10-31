@@ -66,7 +66,7 @@ for (const scheme of ["dark", "light"] as const) {
 }
 
 for (const scheme of ["dark", "light"] as const) {
-  for (const [name, role, label] of [["header", "link", "Shop"], ["card", "button", "Add Arc desk lamp to bag"]] as const) {
+  for (const [name, role, label] of [["header", "link", "Shop"], ["card", "button", "Add Arc desk lamp to bag"], ["search", "searchbox", "Search products"]] as const) {
     test(`${scheme} ${name} focus uses primary outline and contrasting ring`, async ({ page }) => {
       await page.emulateMedia({ colorScheme: scheme });
       await page.goto("/");
