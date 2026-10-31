@@ -76,3 +76,7 @@ description: "Task list for the storefront shell and browse"
 - Phase 1 and T003–T006 first; T004 blocks every story.
 - US1 before US2 (card), US3 can proceed after Phase 2, US4 after US1–US3, US5 last.
 - Parallel: T001, T002, T007, T009.
+
+## Phase 8: Convergence
+
+- [ ] T023 Extend the quick-add test in `tests/e2e/storefront.spec.ts` to assert that two quick-adds of the Arc desk lamp leave exactly one bag line, Terracotta, quantity 2, per US2/AC1 and SC-004 (partial)
