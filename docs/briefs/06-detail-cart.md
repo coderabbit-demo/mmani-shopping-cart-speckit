@@ -35,6 +35,10 @@ Rule e2e tests fail on `main` (no routes) and pass on the head; record both runs
 
 The orchestrator runs the required CodeRabbit CLI review on the pushed commit. If your task's review is enabled, run `coderabbit review --agent` on your patch too, and list its findings as fixed or skipped. If it is blocked, say so.
 
+## Storefront tests
+
+Once `/products/arc-desk-lamp` exists, the spec 002 synthetic-404 tests in `tests/e2e/storefront.spec.ts` can no longer reach the not-found view through the lamp link. This PR may edit that file for this purpose only: each test must reach a missing product some other way (for example a `page.route` that returns 404), keep every assertion, and change nothing else. The pre-flight surfaced this conflict.
+
 ## ALLOW
 
 ```
@@ -54,6 +58,7 @@ ALLOW: tests/golden/pages/product-arc-desk-lamp.aria.yml
 ALLOW: tests/golden/pages/cart-empty.aria.yml
 ALLOW: tests/golden/pages/cart-filled.aria.yml
 ALLOW: specs/003-product-detail-cart/tasks.md
+ALLOW: tests/e2e/storefront.spec.ts
 ```
 
 Everything else must not change, in particular `.github/**`, `scripts/golden/**`, `.coderabbit.yaml`, `AGENTS.md`, `.specify/**` and the other files under `specs/`.
