@@ -1,0 +1,24 @@
+{
+  "state": {
+    "cart": [
+      {
+        "productId": "hush-wireless-headphones",
+        "color": "Oat",
+        "quantity": 1,
+        "unitPrice": 129
+      }
+    ],
+    "coupon": "DESK15",
+    "couponNotice": null,
+    "delivery": "express",
+    "wishlist": [],
+    "session": null,
+    "orders": []
+  },
+  "totals": {
+    "subtotal": 129,
+    "discount": 19.35,
+    "deliveryFee": 12,
+    "total": 121.65
+  }
+}

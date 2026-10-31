@@ -106,9 +106,9 @@ description: "Task list for the catalog and cart domain"
 
 **Depends on**: Phases 2–9.
 
-- [ ] T029 [US8] Add the required scenarios from contracts/goldens.md to `scripts/goldens/scenarios.mjs`, each using fixed times and order IDs
-- [ ] T030 [US8] Run `npm run golden:capture` to create `tests/golden/domain/*.json`, `MANIFEST.sha256` and `BASELINE`; then `npm run golden:check` exits 0
-- [ ] T031 [US8] Extend `tests/goldens-harness.test.mjs` with a test that the scenario list contains every required name from contracts/goldens.md (US8 scenario 4)
+- [x] T029 [US8] Add the required scenarios from contracts/goldens.md to `scripts/goldens/scenarios.mjs`, each using fixed times and order IDs
+- [x] T030 [US8] Run `npm run golden:capture` to create `tests/golden/domain/*.json`, `MANIFEST.sha256` and `BASELINE`; then `npm run golden:check` exits 0
+- [x] T031 [US8] Extend `tests/goldens-harness.test.mjs` with a test that the scenario list contains every required name from contracts/goldens.md (US8 scenario 4)
 
 **Checkpoint**: CI's golden job enforces the domain; later PRs are brownfield.
 
