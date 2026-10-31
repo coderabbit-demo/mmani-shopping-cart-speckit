@@ -1,3 +1,2 @@
-export default function Home() {
-  return <h1>DeskDrop</h1>;
-}
+import { Shop } from "../components/shop";
+export default function Home() { return <Shop />; }
