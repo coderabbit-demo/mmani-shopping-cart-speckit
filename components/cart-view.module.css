@@ -1,0 +1,23 @@
+.page { padding-block: 64px 100px; }
+.page h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 600; letter-spacing: -.05em; margin: 0 0 32px; }
+.layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 40px; align-items: start; }
+.lines { list-style: none; padding: 0; margin: 0; }
+.line { display: grid; grid-template-columns: 150px minmax(0, 1fr) auto; gap: 20px; border-bottom: 1px solid var(--color-border); padding-block: 20px; }
+.art { align-self: start; background: var(--color-art-bg); border-radius: 4px; }
+.lineBody h2 { font-size: 20px; margin: 0 0 8px; }
+.lineBody p { color: var(--color-muted); margin: 8px 0; }
+.amount { font: 400 14px var(--font-hack), monospace; white-space: nowrap; }
+.remove { margin-top: 16px; border: 0; padding: 0; background: transparent; color: var(--color-primary-text); text-decoration: underline; }
+.coupon { display: grid; gap: 10px; margin-top: 28px; }
+.coupon > div { display: flex; gap: 8px; }
+.coupon input { min-width: 0; max-width: 280px; padding: 10px; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-surface); color: var(--color-text); font-family: var(--font-hack), monospace; cursor: text; }
+.coupon button { width: fit-content; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-surface); color: var(--color-text); }
+.error { color: var(--color-danger); margin: 0; }
+.delivery { display: grid; gap: 12px; border: 0; padding: 0; margin: 24px 0; }
+.delivery legend { margin-bottom: 12px; font-weight: 600; }
+.delivery label { display: flex; align-items: center; gap: 8px; }
+.delivery input { accent-color: var(--color-primary); }
+.checkout { display: block; text-align: center; background: var(--color-primary); color: var(--color-on-primary); border-radius: 4px; padding: 15px; margin-top: 14px; }
+.empty { padding: 50px; border: 1px solid var(--color-border); text-align: center; }
+.empty a { color: var(--color-primary-text); text-decoration: underline; }
+@media (max-width: 767px) { .layout { grid-template-columns: 1fr; } .line { grid-template-columns: 80px minmax(0, 1fr); gap: 12px; } .line > .amount { grid-column: 2; } }
