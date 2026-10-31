@@ -12,7 +12,7 @@ Implement tasks T001–T022 of `specs/002-storefront-browse/tasks.md`. Mark each
 <!-- The orchestrator re-verifies each line against main right before start-task and rewrites the heading as "verified <date> on main <sha>". -->
 
 - PRs 2 and 3 are merged: `lib/store.ts`, `lib/contrast.ts` and the `golden:capture:pages` script exist.
-- Next.js 16.4.3 fails to build when Google Fonts is unreachable (confirmed in pre-flight). An offline build is not required: `research.md` R1 says the build needs network access to Google Fonts, which CI, QA and local e2e have. Keep Geist on `next/font/google` (FR-009) and add no fallback or font mock.
+- Next.js 16.4.3 fails to build when Google Fonts is unreachable (confirmed in pre-flight). An offline build is not required: `research.md` R2 says the build needs network access to Google Fonts, which CI, QA and local e2e have. Keep Geist on `next/font/google` (FR-009) and add no fallback or font mock.
 - The Hack release files and the coderabbit.ai/brand logotypes (`white-typemark.svg`, `orange-typemark.svg`) are downloadable: the woff2 files are in `Hack-v3.003-webfonts.zip` on the source-foundry/Hack v3.003 release, and the logotypes are at `https://www.coderabbit.ai/content/assets/<name>.svg`. If your sandbox cannot reach them, report it.
 
 ## Goal
