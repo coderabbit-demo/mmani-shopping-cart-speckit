@@ -123,3 +123,46 @@ test("missing or throwing storage permanently falls back to memory", () => {
     assert.equal(calls, callsAfterFailure, failure);
   }
 });
+
+test("drops a lone cart line with a non-numeric quantity", () => {
+  const state = { ...initialState(), cart: [{ ...cart[0], quantity: "3" }] };
+  assert.deepEqual(parse(snapshot(state)).cart, []);
+});
+
+test("preserves both items of a valid order in their original order", () => {
+  const secondProduct = products[1];
+  const twoLines = [...cart, { productId: secondProduct.id, color: secondProduct.colors[0].name, quantity: 1, unitPrice: secondProduct.price }];
+  const placed = placeOrder({ ...initialState(), cart: twoLines }, products, shipping, { now: "2026-10-31T12:00:00.000Z", orderId: "DD-234567" }).state.orders[0];
+  assert.equal(placed.items.length, 2);
+  assert.notEqual(placed.items[0].productId, placed.items[1].productId);
+  assert.deepEqual(parse(snapshot({ ...initialState(), orders: [placed] })).orders, [placed]);
+});
+
+test("rejects non-string inputs even when they contain a valid serialized snapshot", () => {
+  const raw = serialize(full);
+  assert.deepEqual(parse(raw), { ...full, couponNotice: null });
+  for (const input of [[raw], 123, { raw }, null]) {
+    assert.deepEqual(parse(input), initialState());
+  }
+});
+
+test("accepts leap days only in leap years", () => {
+  const leapOrder = { ...order, placedAt: "2024-02-29T00:00:00Z" };
+  const nonLeapOrder = { ...order, placedAt: "2025-02-29T00:00:00Z" };
+  assert.deepEqual(parse(snapshot({ ...initialState(), orders: [leapOrder, nonLeapOrder] })).orders, [leapOrder]);
+});
+
+test("rejects an order timestamp with hour 24", () => {
+  const valid = { ...order, placedAt: "2026-10-31T23:00:00Z" };
+  const invalid = { ...order, placedAt: "2026-10-31T24:00:00Z" };
+  assert.deepEqual(parse(snapshot({ ...initialState(), orders: [valid, invalid] })).orders, [valid]);
+});
+
+test("load reflects storage cleared outside the adapter", () => {
+  const backing = storageMock();
+  const adapter = createStorage(() => backing);
+  adapter.save("saved");
+  assert.equal(adapter.load(), "saved");
+  backing.removeItem(STORAGE_KEY);
+  assert.equal(adapter.load(), null);
+});
