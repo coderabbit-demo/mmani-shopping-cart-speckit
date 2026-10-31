@@ -1,6 +1,6 @@
 # Brief 10a — `fix: keep the demo key removed after a reset and reload`
 
-**Mode:** fix, lane A, after PR 9b. Goldens stay byte-identical. **Jira:** none (convergence follow-up)
+**Mode:** fix, lane A, after PR 9b. Goldens stay byte-identical. **Jira:** SC-34 (convergence follow-up to PR 9, which built the reset)
 **Read first:** `specs/005-account-persistence/spec.md` (US5), `specs/005-account-persistence/research.md` (R1), `specs/005-account-persistence/tasks.md`, `.specify/memory/constitution.md`, `AGENTS.md`.
 
 ## Tasks in scope
