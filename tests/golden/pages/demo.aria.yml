@@ -1,0 +1,26 @@
+- /children: deep-equal
+- banner:
+  - link "DeskDrop":
+    - /url: /
+  - navigation "Main navigation":
+    - link "Shop":
+      - /url: /
+    - link "Wishlist (0)":
+      - /url: /wishlist
+    - link "Orders":
+      - /url: /orders
+    - link "Account":
+      - /url: /account
+    - link "Bag (0)":
+      - /url: /cart
+- main:
+  - heading "Demo data" [level=1]
+  - paragraph: Clear your bag, wishlist, account and order history on this device.
+  - button "Reset demo data"
+  - status
+- contentinfo:
+  - text: DeskDrop.
+  - paragraph: Little things for your big ideas.
+  - text: Built with
+  - img "CodeRabbit"
+- alert

@@ -34,6 +34,10 @@ Reload, rule 5 and storage e2e fail on `main` and pass on the head; record both 
 
 The orchestrator runs the required CodeRabbit CLI review on the pushed commit. If your task's review is enabled, run `coderabbit review --agent` on your patch too, and list its findings as fixed or skipped. If it is blocked, say so.
 
+## Storage adapter fix
+
+The pre-PR CodeRabbit CLI review found that after a failed `setItem`, `createStorage` (from PR 7) skipped `removeItem`. A confirmed reset could then leave the old snapshot in localStorage, which breaks US5 scenario 1 and FR-007. This PR may change `clear()` in `lib/persistence.ts` to attempt removal after the fallback, inside a catch, and add its guards to `tests/persistence.test.mjs`. The API, the contract and every other function stay unchanged.
+
 ## ALLOW
 
 ```
@@ -53,6 +57,8 @@ ALLOW: tests/golden/pages/account-guest.aria.yml
 ALLOW: tests/golden/pages/wishlist-empty.aria.yml
 ALLOW: tests/golden/pages/demo.aria.yml
 ALLOW: specs/005-account-persistence/tasks.md
+ALLOW: lib/persistence.ts
+ALLOW: tests/persistence.test.mjs
 ```
 
 Everything else must not change, in particular `.github/**`, `scripts/golden/**`, `.coderabbit.yaml`, `AGENTS.md`, `.specify/**` and the other files under `specs/`.

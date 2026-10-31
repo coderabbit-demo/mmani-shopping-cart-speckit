@@ -99,11 +99,13 @@ export function parseStored(raw: unknown, products: Product[], domain: Domain): 
 export function createStorage(getStorage: () => Storage | undefined): { load: () => string | null; save: (value: string) => void; clear: () => void } {
   let memory: string | null = null;
   let fallback = false;
+  let lastStorage: Storage | undefined;
   function access(action: (storage: Storage) => void): void {
     if (fallback) return;
     try {
       const storage = getStorage();
       if (!storage) { fallback = true; return; }
+      lastStorage = storage;
       action(storage);
     } catch {
       fallback = true;
@@ -112,6 +114,13 @@ export function createStorage(getStorage: () => Storage | undefined): { load: ()
   return {
     load() { access((storage) => { memory = storage.getItem(STORAGE_KEY); }); return memory; },
     save(value) { memory = value; access((storage) => { storage.setItem(STORAGE_KEY, value); }); },
-    clear() { memory = null; access((storage) => { storage.removeItem(STORAGE_KEY); }); },
+    clear() {
+      memory = null;
+      if (fallback) {
+        try { lastStorage?.removeItem(STORAGE_KEY); } catch { }
+      } else {
+        access((storage) => { storage.removeItem(STORAGE_KEY); });
+      }
+    },
   };
 }

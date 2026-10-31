@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { productById, products } from "../lib/catalog";
+import { createStorage, parseStored, serialize } from "../lib/persistence";
 import * as domain from "../lib/store";
 
 type Store = {
@@ -29,7 +30,19 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState(domain.initialState);
   const current = useRef(state);
   const [hydrated, setHydrated] = useState(false);
-  useEffect(() => { setHydrated(true); }, []);
+  const storage = useRef(createStorage(() => window.localStorage));
+  const skippedState = useRef<domain.StoreState | null>(null);
+  useEffect(() => {
+    const restored = parseStored(storage.current.load(), products, domain);
+    current.current = restored;
+    setState(restored);
+    setHydrated(true);
+  }, []);
+  useEffect(() => {
+    if (!hydrated || state === skippedState.current) return;
+    skippedState.current = null;
+    storage.current.save(serialize(state));
+  }, [hydrated, state]);
   function commit(next: domain.StoreState) { current.current = next; setState(next); }
   function accept(result: domain.Result): string | null {
     commit(result.state);
@@ -59,7 +72,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     toggleWishlist: (id) => commit(domain.toggleWishlist(current.current, id)),
     signIn: (email, password) => accept(domain.signIn(current.current, email, password)),
     signOut: () => commit(domain.signOut(current.current)),
-    resetAll: () => commit(domain.initialState()),
+    resetAll: () => {
+      const empty = domain.initialState();
+      skippedState.current = empty;
+      storage.current.clear();
+      commit(empty);
+    },
   };
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }

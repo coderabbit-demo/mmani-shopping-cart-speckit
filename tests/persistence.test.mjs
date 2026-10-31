@@ -124,6 +124,47 @@ test("missing or throwing storage permanently falls back to memory", () => {
   }
 });
 
+test("clear removes an earlier stored snapshot after a later save fails", () => {
+  const values = new Map();
+  let writes = 0;
+  let reads = 0;
+  const backing = {
+    getItem(key) { reads++; return values.get(key) ?? null; },
+    setItem(key, value) { if (++writes > 1) throw new Error("quota"); values.set(key, value); },
+    removeItem(key) { values.delete(key); },
+  };
+  const adapter = createStorage(() => backing);
+  adapter.save("persisted");
+  assert.equal(values.get(STORAGE_KEY), "persisted");
+  adapter.save("memory");
+  adapter.save("still in memory");
+  assert.equal(adapter.load(), "still in memory");
+  assert.equal(writes, 2);
+  assert.equal(reads, 0);
+  adapter.clear();
+  assert.equal(values.has(STORAGE_KEY), false);
+  assert.equal(adapter.load(), null);
+  assert.equal(reads, 0);
+});
+
+test("clear still attempts removal safely when storage throws after fallback", () => {
+  let value = null;
+  let writes = 0;
+  let removals = 0;
+  const backing = {
+    getItem() { return value; },
+    setItem(_key, next) { if (++writes > 1) throw new Error("quota"); value = next; },
+    removeItem(key) { assert.equal(key, STORAGE_KEY); removals++; throw new Error("denied"); },
+  };
+  const adapter = createStorage(() => backing);
+  adapter.save("persisted");
+  adapter.save("memory");
+  assert.doesNotThrow(() => adapter.clear());
+  assert.equal(removals, 1);
+  assert.equal(adapter.load(), null);
+  assert.equal(value, "persisted");
+});
+
 test("drops a lone cart line with a non-numeric quantity", () => {
   const state = { ...initialState(), cart: [{ ...cart[0], quantity: "3" }] };
   assert.deepEqual(parse(snapshot(state)).cart, []);

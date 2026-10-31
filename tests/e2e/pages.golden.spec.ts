@@ -89,6 +89,7 @@ test("@golden checkout success accessible structure", async ({ page }, testInfo)
   for (const [label, value] of Object.entries({ "Full name": "Alex Smith", Email: "alex@example.com", Address: "123 Main St", City: "Portland", "Postal code": "97201" })) await page.getByLabel(label, { exact: true }).fill(value);
   await page.getByRole("button", { name: "Place order" }).click();
   await expect(page.getByRole("heading", { name: "Thank you, Alex!" })).toBeVisible();
+  await expect(page.locator("#__next-route-announcer__")).toHaveText("Thank you, Alex!");
   await matchPageSnapshot(page, testInfo, "checkout-success.aria.yml");
 });
 
@@ -96,4 +97,22 @@ test("@golden empty orders accessible structure", async ({ page }, testInfo) => 
   await page.goto("/orders");
   await expect(page.getByText("No orders yet.")).toBeVisible();
   await matchPageSnapshot(page, testInfo, "orders-empty.aria.yml");
+});
+
+test("@golden guest account accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/account");
+  await expect(page.getByRole("button", { name: "Sign in" })).toBeEnabled();
+  await matchPageSnapshot(page, testInfo, "account-guest.aria.yml");
+});
+
+test("@golden empty wishlist accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/wishlist");
+  await expect(page.getByText("Your wishlist is empty.")).toBeVisible();
+  await matchPageSnapshot(page, testInfo, "wishlist-empty.aria.yml");
+});
+
+test("@golden demo accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/demo");
+  await expect(page.getByRole("button", { name: "Reset demo data" })).toBeEnabled();
+  await matchPageSnapshot(page, testInfo, "demo.aria.yml");
 });
