@@ -7,7 +7,7 @@
 
 Implement tasks T004–T015 of `specs/005-account-persistence/tasks.md`. Mark each task done in tasks.md as you finish it. Leave tasks outside this range untouched.
 
-## Assumptions (to verify before start)
+## Assumptions (verified 2026-10-31 on main 45209a1)
 
 <!-- The orchestrator re-verifies each line against main right before start-task and rewrites the heading as "verified <date> on main <sha>". -->
 

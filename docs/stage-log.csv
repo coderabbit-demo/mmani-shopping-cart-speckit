@@ -22,6 +22,155 @@ setup,maintainer-wait: environment prep (bootstrap scaffold 4659e55),2026-10-30T
 2,orchestrator: fix brief 02 + contract (docs PR #1 9f142e1),2026-10-30T20:12:14Z,2026-10-30T20:15:00Z,"spec defect, not agent"
 2,implement (agent; 9735bb30),2026-10-30T20:15:00Z,2026-10-30T20:17:03Z,9 files; patch 5837179
 3,verify (scope gate x2; checks; CLI review 1 Minor; 4 judges PASS),2026-10-30T20:14:02Z,2026-10-30T20:19:00Z,tests judge: 8 advisory mutation survivors
-3,pre-PR fix round 1 (CLI Minor + contrast test gaps),2026-10-30T20:19:00Z,,
+3,pre-PR fix round 1 (CLI Minor + contrast test gaps),2026-10-30T20:19:00Z,2026-10-30T20:25:30Z,agent 20:18:45-20:21:51; head 42c0218; combined judge PASS
 2,verify (scope gate x2 PASS; checks PASS; CLI review 0 findings; security+behavior PASS; scope FAIL),2026-10-30T20:17:20Z,2026-10-30T20:24:00Z,scope FAIL: brief claims contract on main has applyCoupon exception; fix only on docs PR #1 (orchestrator defect); tests judge pending
 docs,docs PR #1 thread: stale npm test finding replied + resolved,2026-10-30T20:24:00Z,2026-10-30T20:25:00Z,finding read pre-merge boilerplate package.json
+3,PR opened,2026-10-30T20:25:44Z,,PR #3
+3,post-PR review (CodeRabbit),2026-10-30T20:25:44Z,2026-10-30T20:33:50Z,"APPROVED at 42c0218, 0 threads, no fix round"
+2,pre-PR fix round 1 (tests judge: $100 boundary untested),2026-10-30T20:24:30Z,2026-10-30T20:27:30Z,agent 20:21:59-20:24:11; head f896919; combined judge PASS except scope on fix-message wording (orchestrator defect)
+2,PR opened,2026-10-30T20:27:56Z,,PR #4; depends on docs PR #1
+2,post-PR review (CodeRabbit),2026-10-30T20:27:56Z,2026-10-30T20:34:25Z,"APPROVED at f896919, 0 threads, no fix round"
+3,strict gate PASS; waiting for maintainer merge,2026-10-30T20:34:10Z,,maintainer wait
+2,strict gate PASS; waiting for docs PR #1 then maintainer merge,2026-10-30T20:35:00Z,,maintainer wait
+3,maintainer wait (merge),2026-10-30T20:33:50Z,2026-10-30T22:29:06Z,maintainer wait; approved and gated until maintainer merged
+3,merged,2026-10-30T22:29:06Z,2026-10-30T22:29:06Z,merged by maintainer at 8f25728 (head 42c0218); SC-28 and SC-26 moved to Done by hand (post-merge automation did not run)
+docs1,update with main,2026-10-30T22:31:00Z,2026-10-30T22:32:00Z,branch BEHIND after PR #3 merge; merged main (head 2486349); CodeRabbit re-review requested by push
+docs1,post-update review (CodeRabbit),2026-10-30T22:32:00Z,2026-10-30T22:53:14Z,"CodeRabbit wait; review skipped on merge-only head 2486349, no approval; CI green, 0 threads"
+docs1,maintainer wait (approval and merge),2026-10-30T22:53:14Z,2026-10-30T23:10:21Z,maintainer wait
+docs1,merged,2026-10-30T23:10:21Z,2026-10-30T23:10:21Z,merged by maintainer at 3b37911 (head 2486349)
+2,update with main and re-review,2026-10-30T23:10:41Z,2026-10-30T23:11:59Z,"head 01ce9ed; CI green; CodeRabbit skipped merge-only head; strict gate FAIL (Security Gate row and CodeRabbit check not on head)"
+2,maintainer wait (review and merge),2026-10-30T23:11:59Z,2026-10-31T01:24:36Z,maintainer wait; CodeRabbit skipped merge-only head 01ce9ed
+2,merged,2026-10-31T01:24:36Z,2026-10-31T01:24:36Z,merged by maintainer at 8430cfb (head 01ce9ed); SC-27 moved to Done by hand
+4,brief re-verify,2026-10-31T01:24:40Z,2026-10-31T01:25:37Z,verified on main 8430cfb
+5,brief re-verify,2026-10-31T01:24:40Z,2026-10-31T01:25:45Z,verified on main 8430cfb; added Hack webfonts and logotype URLs
+4,pre-flight and implement,2026-10-31T01:25:37Z,,task 899524cb (lane B)
+5,pre-flight and implement,2026-10-31T01:25:45Z,,task 665d3053 (lane A)
+5,pre-flight conflict,2026-10-31T01:25:45Z,2026-10-31T01:30:09Z,offline Geist build fails on Next 16.4.3; research.md R1 amended in docs PR #5
+5,implement,2026-10-31T01:33:00Z,,round 1 sent to task 665d3053
+4,implement,2026-10-31T01:25:37Z,2026-10-31T01:30:30Z,"patch ready, 20 files; pushed 1120ba0"
+4,verify,2026-10-31T01:31:45Z,,scope gate PASS; checks, CLI review and four judges running
+4,verify,2026-10-31T01:31:45Z,2026-10-31T01:36:00Z,"checks green, CLI 0 findings, four judges PASS"
+4,PR opened,2026-10-31T01:36:20Z,,PR #6
+5,implement,2026-10-31T01:33:00Z,2026-10-31T01:42:34Z,"patch ready, 23 files; pushed 065fee4"
+5,verify,2026-10-31T01:43:30Z,,scope gate PASS; checks, CLI review and four judges running
+4,post-PR review (CodeRabbit),2026-10-31T01:36:20Z,2026-10-31T01:44:12Z,"APPROVED at 1120ba0, 0 threads, no fix round"
+4,strict gate PASS; waiting for maintainer merge,2026-10-31T01:44:25Z,,maintainer wait
+5,scope judge,2026-10-31T01:43:30Z,2026-10-31T01:47:00Z,"FAIL only on brief wording (cited research.md R1, fonts are R2); diff in scope; brief and docs PR #5 corrected, no code change"
+5,verify,2026-10-31T01:43:30Z,2026-10-31T01:52:00Z,"checks green (38 unit, 10 e2e); CLI 1 Major + 3 Minor; security PASS; behavior FAIL (light-theme orange text 2.87:1); tests FAIL (4 acceptance clauses untested); scope FAIL on brief wording only"
+5,fix round 1,2026-10-31T01:53:00Z,,"contrast, synthetic-404 routing, literal prices in home golden, 4 acceptance assertions"
+5,fix round 1 (agent),2026-10-31T01:53:00Z,2026-10-31T01:55:02Z,"6 files; pushed 2b4ee73"
+5,verify fix round 1,2026-10-31T01:56:00Z,,scope gate PASS; checks, CLI and four judges running
+5,verify fix round 1,2026-10-31T01:56:00Z,2026-10-31T02:02:51Z,"checks green (38 unit, 18 e2e); security PASS; tests PASS; scope FAIL (new In-bag card UI); behavior FAIL rejected (BASELINE is domain-only); CLI 3 Major-or-Minor contrast, 1 CTA weight, 1 stale lookup"
+5,fix round 2,2026-10-31T02:02:51Z,2026-10-31T02:08:19Z,"remove In-bag UI, focus and border contrast, CTA weight, stale product lookup"
+5,fix round 2 (agent),2026-10-31T02:02:51Z,2026-10-31T02:08:19Z,"6 files; pushed 5de959c"
+5,verify fix round 2,2026-10-31T02:10:00Z,,scope gate PASS; checks, CLI and four judges running
+5,verify fix round 2,2026-10-31T02:10:00Z,2026-10-31T02:12:52Z,"checks green (39 unit, 28 e2e); four judges PASS; CLI 1 Minor (hero h1 in Hack, BRAND needs Geist 600)"
+5,fix round 3,2026-10-31T02:12:52Z,,hero h1 font
+5,fix round 3 (agent),2026-10-31T02:12:30Z,2026-10-31T02:14:52Z,"2 files; pushed dd7b274"
+5,verify fix round 3,2026-10-31T02:15:30Z,,scope gate PASS; checks, CLI and combined judge running
+5,verify fix round 3,2026-10-31T02:15:30Z,2026-10-31T02:21:55Z,"checks green (39 unit, 30 e2e); combined judge PASS; CLI 3 Minor (reduced motion, label and heading weights)"
+5,fix round 4,2026-10-31T02:21:55Z,,reduced motion and BRAND font weights
+5,fix round 4 (agent),2026-10-31T02:19:00Z,2026-10-31T02:24:26Z,"2 files; pushed c4faf4e"
+5,verify fix round 4,2026-10-31T02:25:00Z,,scope gate PASS; checks, CLI and combined judge running
+5,verify fix round 4,2026-10-31T02:25:00Z,2026-10-31T02:28:17Z,"checks green (39 unit, 38 e2e); combined judge PASS; CLI 1 Minor (Mint decorative) left for PR review"
+5,waiting for PR #6 merge before opening,2026-10-31T02:28:17Z,,maintainer wait; opening after PR #6 avoids a skipped review on an update-with-main head
+4,maintainer wait (merge),2026-10-31T01:44:25Z,2026-10-31T02:57:33Z,maintainer wait
+4,merged,2026-10-31T02:57:33Z,2026-10-31T02:57:33Z,merged by maintainer at 24dce3c (head 1120ba0); SC-29 moved to Done by hand
+5,waiting for PR #6 merge before opening,2026-10-31T02:28:17Z,2026-10-31T02:57:33Z,maintainer wait
+5,update with main and recheck,2026-10-31T02:57:45Z,2026-10-31T02:58:58Z,"merged main 24dce3c (d406e93); 40 unit, golden check with domain goldens, 38 e2e all pass"
+5,PR opened,2026-10-31T02:58:58Z,,PR #7
+7,brief re-verify,2026-10-31T02:57:45Z,2026-10-31T02:58:30Z,verified on main 24dce3c
+7,pre-flight and implement,2026-10-31T02:58:30Z,,task c9a53e13 (lane B)
+all,maintainer authorized orchestrator merges of gated PRs,2026-10-31T03:02:03Z,2026-10-31T03:02:03Z,confirmed by maintainer in this session; merge via gh pr merge --match-head-commit after strict-gate PASS
+5,post-PR review (CodeRabbit),2026-10-31T02:59:30Z,2026-10-31T03:06:58Z,"CHANGES_REQUESTED at d406e93, 2 Minor threads (focus must be primary per US4.3; page goldens use contain matching)"
+5,fix round 5,2026-10-31T03:07:37Z,,"two-tone focus indicator, deep-equal page goldens"
+7,implement,2026-10-31T02:58:30Z,2026-10-31T03:05:45Z,"patch ready, 3 files; pushed 04446c4"
+7,verify,2026-10-31T03:06:30Z,,scope gate PASS; checks, CLI and four judges running
+7,verify,2026-10-31T03:06:30Z,2026-10-31T03:10:21Z,"checks green (43 unit, 1 e2e); CLI 0 findings; scope, security, behavior PASS; tests FAIL (3 parse rules unproven by mutation)"
+7,fix round 1,2026-10-31T03:10:21Z,,tests for numeric quantity, multi-item orders, non-string input, date and load edges
+7,fix round 1 (agent),2026-10-31T03:10:30Z,2026-10-31T03:12:17Z,"1 file (tests only); pushed 99f253c"
+7,verify fix round 1,2026-10-31T03:13:00Z,,scope gate PASS; checks, CLI and combined judge running
+5,fix round 5 (agent),2026-10-31T03:08:00Z,2026-10-31T03:15:32Z,"5 files; pushed a4a3ea7 to PR #7"
+5,verify fix round 5,2026-10-31T03:16:30Z,,scope gate PASS; checks, CLI and four judges running; CodeRabbit re-reviewing
+5,verify fix round 5,2026-10-31T03:16:30Z,2026-10-31T03:19:40Z,"scope, tests, security PASS; behavior FAIL (search input ring hidden; BASELINE point rejected again)"
+5,fix round 6,2026-10-31T03:19:40Z,,search input focus ring
+5,fix round 6 (agent),2026-10-31T03:19:40Z,2026-10-31T03:21:32Z,"2 files; pushed d332d3d to PR #7"
+5,verify fix round 6,2026-10-31T03:22:30Z,,scope gate PASS; checks, CLI, combined judge and CodeRabbit re-review running
+5,verify fix round 6,2026-10-31T03:22:30Z,2026-10-31T03:32:44Z,"checks green (40 unit, 45 e2e); CLI 0 findings; combined judge PASS"
+5,post-PR re-review (CodeRabbit),2026-10-31T03:15:40Z,2026-10-31T03:32:44Z,"APPROVED at d332d3d, 0 threads"
+5,strict gate PASS and merge,2026-10-31T03:32:50Z,2026-10-31T03:33:08Z,merged by orchestrator (maintainer-authorized) at 9cb7b05 with --match-head-commit d332d3d; SC-30 moved to Done by hand
+6,brief re-verify,2026-10-31T03:33:08Z,2026-10-31T03:33:54Z,"verified on main 9cb7b05; added /bag -> /cart header link and two page-golden url changes"
+6,pre-flight and implement,2026-10-31T03:33:54Z,,task 8037f5b5 (lane A)
+6,pre-flight conflict,2026-10-31T03:33:54Z,2026-10-31T03:37:32Z,"brief asked to change shell.tsx and page goldens; FR-008 and T012-T013 forbid it; split into PR 5b"
+5b,pre-flight and implement,2026-10-31T03:38:04Z,,task fcdb6941 (lane A); bag link /bag -> /cart
+5b,pre-flight conflict,2026-10-31T03:38:04Z,2026-10-31T03:41:00Z,constitution requires the brief on main; opened docs PR #8 (supersedes #5)
+docs8,PR opened,2026-10-31T03:42:30Z,,"briefs 04-07, 05b, research R2"
+docs8,post-PR review and fix,2026-10-31T03:42:30Z,2026-10-31T03:48:30Z,"CHANGES_REQUESTED, 1 Minor (route matcher in brief 05b); fixed 5f6bdab, replied and resolved"
+docs8,re-review and strict gate,2026-10-31T03:48:30Z,2026-10-31T03:55:40Z,"APPROVED at 5f6bdab, gate PASS"
+docs8,merged,2026-10-31T03:55:46Z,2026-10-31T03:55:46Z,merged by orchestrator with --match-head-commit 5f6bdab
+5b,restart,2026-10-31T03:55:48Z,,brief now on main
+5b,pre-flight and implement,2026-10-31T03:56:03Z,,task 40b3e5cb (lane A), retry on main a235acf
+5b,implement,2026-10-31T03:56:30Z,2026-10-31T04:02:07Z,"patch ready, 4 files; pushed e874d58"
+5b,verify,2026-10-31T04:03:00Z,,scope gate PASS; checks, CLI and judges running
+5b,verify,2026-10-31T04:03:00Z,2026-10-31T04:08:17Z,"checks green; scope, tests, security PASS; behavior FAIL rejected (BASELINE domain-only); CLI Major rejected (/cart route is PR 6 scope; main /bag also 404s)"
+5b,PR opened,2026-10-31T04:08:17Z,,PR #9
+5b,post-PR review (CodeRabbit),2026-10-31T04:08:00Z,2026-10-31T04:13:13Z,"APPROVED at e874d58, 0 threads"
+5b,strict gate PASS and merge,2026-10-31T04:13:20Z,2026-10-31T04:13:37Z,merged by orchestrator at 235b3bf with --match-head-commit e874d58
+6,brief re-verify,2026-10-31T04:13:37Z,2026-10-31T04:13:40Z,verified on main 235b3bf (bag link is /cart)
+6,pre-flight and implement,2026-10-31T04:13:40Z,,task 1ae96a0b (lane A)
+6,pre-flight conflict,2026-10-31T04:13:40Z,2026-10-31T04:16:11Z,storefront 404 tests use the lamp link; allowed storefront.spec.ts for that purpose
+6,implement,2026-10-31T04:16:28Z,,round 1 sent to task 1ae96a0b
+7,verify fix round 1,2026-10-31T03:13:00Z,2026-10-31T03:17:25Z,"checks green (49 unit); combined judge PASS; CLI 1 Major (storage-limit data loss, contract-defined)"
+7,maintainer decision (storage limit),2026-10-31T03:17:25Z,2026-10-31T04:27:51Z,"maintainer wait; chose option 1: accept and document"
+7,update with main and recheck,2026-10-31T04:27:51Z,2026-10-31T04:27:51Z,"merged main 235b3bf (f8a0b70); 53 unit, 45 e2e pass"
+7,PR opened,2026-10-31T04:27:51Z,,PR #10
+6,implement,2026-10-31T04:16:30Z,2026-10-31T04:25:48Z,"patch ready, 17 files; pushed 4a49aa9"
+6,verify,2026-10-31T04:26:30Z,2026-10-31T04:32:09Z,"checks green (40 unit, 54 e2e); CLI 0; scope, security PASS; behavior FAIL (empty bag hides coupon notice); tests judge still running"
+6,fix round 1,2026-10-31T04:32:09Z,,coupon notice in empty bag
+6,fix round 1 (agent),2026-10-31T04:31:00Z,2026-10-31T04:36:02Z,"2 files; pushed 7241e66"
+6,tests judge (round 0),2026-10-31T04:26:30Z,2026-10-31T04:37:19Z,"FAIL: FR-009 gate and FR-003 error path untested; minor second-line quantity"
+6,fix round 2,2026-10-31T04:37:19Z,,tests for FR-009, FR-003 error, line-specific quantity; combined judge will cover rounds 1 and 2
+7,post-PR review (CodeRabbit),2026-10-31T04:27:30Z,2026-10-31T04:38:01Z,"APPROVED at f8a0b70, 0 threads"
+7,strict gate PASS and merge,2026-10-31T04:38:10Z,2026-10-31T04:38:27Z,merged by orchestrator with --match-head-commit f8a0b70; SC-32 moved to Done by hand
+6,fix round 2 (agent),2026-10-31T04:37:30Z,2026-10-31T04:41:40Z,"tests only; pushed ef0930b"
+6,verify fix rounds 1-2,2026-10-31T04:42:30Z,,scope gate PASS; checks, CLI and combined judge running
+6,verify fix rounds 1-2,2026-10-31T04:42:30Z,2026-10-31T04:46:08Z,"checks green (40 unit, 58 e2e); CLI 0; combined judge PASS"
+6,update with main and recheck,2026-10-31T04:46:08Z,2026-10-31T04:46:08Z,"merged main 10aa1f3 (71682a2); 53 unit, 58 e2e pass"
+6,PR opened,2026-10-31T04:46:08Z,,PR #11
+6,post-PR review (CodeRabbit),2026-10-31T04:47:00Z,2026-10-31T04:55:56Z,"CHANGES_REQUESTED, 1 Major (storefront.spec.ts outside brief ALLOW on main)"
+6,brief fix on PR branch,2026-10-31T04:56:00Z,2026-10-31T04:57:30Z,"orchestrator docs commit e7cf2b3 adds the approved ALLOW to brief 06; replied and resolved"
+6,post-PR re-review (CodeRabbit),2026-10-31T04:57:30Z,2026-10-31T05:10:46Z,"APPROVED at e7cf2b3, 0 threads"
+6,strict gate PASS and merge,2026-10-31T05:10:50Z,2026-10-31T05:11:10Z,merged by orchestrator at a2728d6 with --match-head-commit e7cf2b3; SC-31 moved to Done by hand
+8,brief re-verify,2026-10-31T05:11:10Z,2026-10-31T05:12:00Z,verified on main a2728d6
+8,pre-flight and implement,2026-10-31T05:11:25Z,,task 4e833325 (lane A)
+8,implement,2026-10-31T05:11:25Z,2026-10-31T05:23:52Z,"pre-flight passed; patch ready, 18 files; pushed ea6d4ea"
+8,verify,2026-10-31T05:24:30Z,,scope gate PASS; checks, CLI and four judges running
+8,verify,2026-10-31T05:24:30Z,2026-10-31T05:30:21Z,"checks green (62 unit, 69 e2e); CLI 0; scope, tests, security PASS; behavior FAIL rejected (BASELINE domain-only)"
+8,PR opened,2026-10-31T05:30:21Z,,PR #12
+8,post-PR review (CodeRabbit),2026-10-31T05:30:30Z,2026-10-31T05:38:39Z,"APPROVED at ea6d4ea, 0 threads, no fix round"
+8,strict gate PASS and merge,2026-10-31T05:38:45Z,2026-10-31T05:39:04Z,merged by orchestrator at 45209a1 with --match-head-commit ea6d4ea; SC-33 moved to Done by hand
+9,brief re-verify,2026-10-31T05:39:04Z,2026-10-31T05:39:18Z,verified on main 45209a1
+9,pre-flight and implement,2026-10-31T05:39:18Z,,task 64e2e82b (lane A)
+9,implement,2026-10-31T05:39:18Z,2026-10-31T05:49:02Z,"pre-flight passed; patch ready, 16 files; pushed 32ffb48"
+9,verify,2026-10-31T05:50:00Z,,scope gate PASS; checks, CLI and four judges running
+9,verify,2026-10-31T05:50:00Z,2026-10-31T05:54:36Z,"checks green (62 unit, 83 e2e); scope, security, behavior PASS; CLI 1 Major (reset leaves key after a failed save); tests judge still running"
+9,fix round 1,2026-10-31T05:54:36Z,,clear() removes the key after fallback
+9,fix round 1 (agent),2026-10-31T05:55:00Z,2026-10-31T06:00:44Z,"2 files; pushed bd5374b; agent saw checkout golden flake twice"
+9,verify fix round 1,2026-10-31T06:01:30Z,,scope gate PASS; checks (e2e x3 for flake), CLI and combined judge running
+9,combined judge fix round 1,2026-10-31T06:01:30Z,2026-10-31T06:08:00Z,"tests, security, behavior PASS; scope FAIL only on my citation (US3 vs US5); corrected the record, code accepted"
+9,verify fix round 1 (checks),2026-10-31T06:01:30Z,2026-10-31T06:05:31Z,"64 unit; e2e 83 in 2 of 3 runs (1 golden flake under load); CLI 0"
+9,PR opened,2026-10-31T06:06:28Z,,PR #13
+9,post-PR review (CodeRabbit),2026-10-31T06:06:30Z,2026-10-31T06:16:11Z,"CHANGES_REQUESTED, 1 Major (persistence files outside brief ALLOW on main)"
+9,brief fix on PR branch,2026-10-31T06:16:30Z,2026-10-31T06:17:30Z,"orchestrator docs commit 5cc2d0e adds the approved ALLOW to brief 09; replied and resolved"
+9,post-PR re-review (CodeRabbit),2026-10-31T06:17:30Z,2026-10-31T06:26:20Z,"APPROVED at 5cc2d0e, 0 threads; CI green"
+9,strict gate PASS and merge,2026-10-31T06:26:25Z,2026-10-31T06:26:40Z,merged by orchestrator with --match-head-commit 5cc2d0e; SC-34 moved to Done by hand
+docs-final,PR opened,2026-10-31T06:27:52Z,,stage log and run report
+docs-final,CI e2e failure,2026-10-31T06:28:55Z,2026-10-31T06:34:55Z,"checkout-success golden flake (route announcer empty), failed twice incl. rerun; CodeRabbit APPROVED"
+9b,pre-flight and implement,2026-10-31T06:35:50Z,,task 7b014067 (lane A); deterministic checkout-success golden
+9b,implement,2026-10-31T06:35:50Z,2026-10-31T06:44:00Z,"2 files; repeat runs main 13/20, patch 20/20; pushed 9d72ed6 plus brief commit 6ce80b6"
+9b,verify,2026-10-31T06:45:00Z,,scope gate PASS; checks (e2e x3), CLI and combined judge running
+9b,verify,2026-10-31T06:45:00Z,2026-10-31T06:50:27Z,"checks green (64 unit, 83 e2e x3); CLI 0; combined judge PASS"
+9b,PR opened,2026-10-31T06:50:27Z,,PR #15
+9b,post-PR review (CodeRabbit),2026-10-31T06:50:00Z,2026-10-31T06:55:40Z,"APPROVED at 6ce80b6, 0 threads, CI green"
+9b,strict gate PASS and merge,2026-10-31T06:55:47Z,2026-10-31T06:56:03Z,merged by orchestrator with --match-head-commit 6ce80b6
+docs-final,update with main,2026-10-31T06:56:10Z,,merge main into docs/run2-stage-log after PR 9b
