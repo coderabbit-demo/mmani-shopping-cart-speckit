@@ -33,7 +33,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const storage = useRef(createStorage(() => window.localStorage));
   const skippedState = useRef<domain.StoreState | null>(null);
   useEffect(() => {
-    const restored = parseStored(storage.current.load(), products, domain);
+    const stored = storage.current.load();
+    const restored = parseStored(stored, products, domain);
+    if (stored === null) skippedState.current = restored;
     current.current = restored;
     setState(restored);
     setHydrated(true);

@@ -203,6 +203,16 @@ test("disabled storage supports the full journey in memory", async ({ page }) =>
   await expect(page.getByText("Arc desk lamp", { exact: true })).toBeVisible();
 });
 
+test("a first visit stores nothing until the shopper changes state", async ({ page }) => {
+  await page.goto("/demo");
+  await expect(page.getByRole("button", { name: "Reset demo data" })).toBeEnabled();
+  await expect(page.getByRole("link", { name: "Bag (0)" })).toBeVisible();
+  expect(await page.evaluate(key => localStorage.getItem(key), key)).toBeNull();
+  await page.getByRole("link", { name: "Shop", exact: true }).click();
+  await add(page);
+  await expect.poll(async () => page.evaluate(key => localStorage.getItem(key), key)).toContain('"version":1');
+});
+
 test("demo reset can be cancelled and removes all state when confirmed", async ({ page }) => {
   await page.goto("/");
   await save(page, "Arc desk lamp");
@@ -224,9 +234,16 @@ test("demo reset can be cancelled and removes all state when confirmed", async (
   await expect(page.getByRole("link", { name: "Wishlist (0)" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Bag (0)" })).toBeVisible();
   expect(await page.evaluate(key => localStorage.getItem(key), key)).toBeNull();
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Reset demo data" })).toBeEnabled();
+  await expect(page.getByRole("link", { name: "Bag (0)" })).toBeVisible();
+  expect(await page.evaluate(key => localStorage.getItem(key), key)).toBeNull();
   await page.getByRole("link", { name: "Account", exact: true }).click();
   await expect(page.getByRole("button", { name: "Sign in" })).toBeVisible();
   expect(await page.evaluate(key => localStorage.getItem(key), key)).toBeNull();
   await page.getByRole("link", { name: "Orders", exact: true }).click();
   await expect(page.getByText("No orders yet.")).toBeVisible();
+  await page.getByRole("link", { name: "Shop", exact: true }).click();
+  await add(page);
+  await expect.poll(async () => page.evaluate(key => localStorage.getItem(key), key)).toContain('"version":1');
 });
