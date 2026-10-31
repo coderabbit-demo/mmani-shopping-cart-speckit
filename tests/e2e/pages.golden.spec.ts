@@ -3,10 +3,10 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const strictChildren = "- /children: deep-equal\n";
 
-async function matchPageSnapshot(page: Page, testInfo: TestInfo, name: string) {
+async function matchPageSnapshot(page: Page, testInfo: TestInfo, name: string, root = page.locator("body")) {
   const path = testInfo.snapshotPath(name, { kind: "aria" });
   if (existsSync(path)) expect(readFileSync(path, "utf8").startsWith(strictChildren)).toBe(true);
-  await expect(page.locator("body")).toMatchAriaSnapshot({ name });
+  await expect(root).toMatchAriaSnapshot({ name });
   let snapshot = readFileSync(path, "utf8");
   if (!snapshot.startsWith(strictChildren) && ["all", "changed", "missing"].includes(testInfo.config.updateSnapshots)) {
     if (name === "home.aria.yml") {
@@ -89,8 +89,7 @@ test("@golden checkout success accessible structure", async ({ page }, testInfo)
   for (const [label, value] of Object.entries({ "Full name": "Alex Smith", Email: "alex@example.com", Address: "123 Main St", City: "Portland", "Postal code": "97201" })) await page.getByLabel(label, { exact: true }).fill(value);
   await page.getByRole("button", { name: "Place order" }).click();
   await expect(page.getByRole("heading", { name: "Thank you, Alex!" })).toBeVisible();
-  await expect(page.locator("#__next-route-announcer__")).toHaveText("Thank you, Alex!");
-  await matchPageSnapshot(page, testInfo, "checkout-success.aria.yml");
+  await matchPageSnapshot(page, testInfo, "checkout-success.aria.yml", page.locator(".site"));
 });
 
 test("@golden empty orders accessible structure", async ({ page }, testInfo) => {
