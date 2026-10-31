@@ -1,0 +1,67 @@
+{
+  "ok": true,
+  "state": {
+    "cart": [],
+    "coupon": null,
+    "couponNotice": null,
+    "delivery": "standard",
+    "wishlist": [],
+    "session": null,
+    "orders": [
+      {
+        "id": "DD-654321",
+        "placedAt": "2026-01-02T00:00:00.000Z",
+        "items": [
+          {
+            "productId": "form-mechanical-keyboard",
+            "color": "Cloud",
+            "quantity": 2,
+            "unitPrice": 94,
+            "name": "Form mechanical keyboard",
+            "lineTotal": 188
+          }
+        ],
+        "subtotal": 188,
+        "discount": 0,
+        "deliveryFee": 0,
+        "total": 188,
+        "delivery": "standard",
+        "coupon": null,
+        "shipping": {
+          "fullName": "Alex Example",
+          "email": "alex@example.test",
+          "address": "1 Example St",
+          "city": "Demo",
+          "postalCode": "12345"
+        }
+      },
+      {
+        "id": "DD-123456",
+        "placedAt": "2026-01-01T00:00:00.000Z",
+        "items": [
+          {
+            "productId": "arc-desk-lamp",
+            "color": "Sage",
+            "quantity": 1,
+            "unitPrice": 68,
+            "name": "Arc desk lamp",
+            "lineTotal": 68
+          }
+        ],
+        "subtotal": 68,
+        "discount": 0,
+        "deliveryFee": 0,
+        "total": 68,
+        "delivery": "standard",
+        "coupon": null,
+        "shipping": {
+          "fullName": "Alex Example",
+          "email": "alex@example.test",
+          "address": "1 Example St",
+          "city": "Demo",
+          "postalCode": "12345"
+        }
+      }
+    ]
+  }
+}

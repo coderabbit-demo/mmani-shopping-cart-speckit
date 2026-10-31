@@ -1,0 +1,30 @@
+{
+  "state": {
+    "cart": [
+      {
+        "productId": "arc-desk-lamp",
+        "color": "Terracotta",
+        "quantity": 1,
+        "unitPrice": 68
+      },
+      {
+        "productId": "arc-desk-lamp",
+        "color": "Sage",
+        "quantity": 1,
+        "unitPrice": 68
+      }
+    ],
+    "coupon": null,
+    "couponNotice": null,
+    "delivery": "standard",
+    "wishlist": [],
+    "session": null,
+    "orders": []
+  },
+  "totals": {
+    "subtotal": 136,
+    "discount": 0,
+    "deliveryFee": 0,
+    "total": 136
+  }
+}

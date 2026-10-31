@@ -1,0 +1,102 @@
+[
+  {
+    "input": 0,
+    "state": {
+      "cart": [
+        {
+          "productId": "arc-desk-lamp",
+          "color": "Sage",
+          "quantity": 1,
+          "unitPrice": 68
+        }
+      ],
+      "coupon": null,
+      "couponNotice": null,
+      "delivery": "standard",
+      "wishlist": [],
+      "session": null,
+      "orders": []
+    },
+    "totals": {
+      "subtotal": 68,
+      "discount": 0,
+      "deliveryFee": 0,
+      "total": 68
+    }
+  },
+  {
+    "input": -3,
+    "state": {
+      "cart": [
+        {
+          "productId": "arc-desk-lamp",
+          "color": "Sage",
+          "quantity": 1,
+          "unitPrice": 68
+        }
+      ],
+      "coupon": null,
+      "couponNotice": null,
+      "delivery": "standard",
+      "wishlist": [],
+      "session": null,
+      "orders": []
+    },
+    "totals": {
+      "subtotal": 68,
+      "discount": 0,
+      "deliveryFee": 0,
+      "total": 68
+    }
+  },
+  {
+    "input": 11,
+    "state": {
+      "cart": [
+        {
+          "productId": "arc-desk-lamp",
+          "color": "Sage",
+          "quantity": 10,
+          "unitPrice": 68
+        }
+      ],
+      "coupon": null,
+      "couponNotice": null,
+      "delivery": "standard",
+      "wishlist": [],
+      "session": null,
+      "orders": []
+    },
+    "totals": {
+      "subtotal": 680,
+      "discount": 0,
+      "deliveryFee": 0,
+      "total": 680
+    }
+  },
+  {
+    "input": 2.5,
+    "state": {
+      "cart": [
+        {
+          "productId": "arc-desk-lamp",
+          "color": "Sage",
+          "quantity": 2,
+          "unitPrice": 68
+        }
+      ],
+      "coupon": null,
+      "couponNotice": null,
+      "delivery": "standard",
+      "wishlist": [],
+      "session": null,
+      "orders": []
+    },
+    "totals": {
+      "subtotal": 136,
+      "discount": 0,
+      "deliveryFee": 0,
+      "total": 136
+    }
+  }
+]
