@@ -72,8 +72,30 @@ Notes:
    Next fills on its own timing. It failed this docs PR's CI twice; with a 20-run repeat, main passed
    13 of 20. PR 9b (#15) scoped the snapshot to `.site`, and the head then passed 20 of 20 and three
    full runs.
-6. **`/speckit-converge` was not run after each merge**, though PR-MAP asks for it. It should run
-   once per spec now.
+6. **`/speckit-converge` was not run after each merge**, though PR-MAP asks for it. It ran once on
+   all five specs after the run; see "Convergence" below.
+7. **CodeRabbit skips `*.csv` by default.** A PR that changes only `docs/stage-log.csv` gets no
+   review, so the strict gate fails. Ship stage-log rows together with a reviewed file.
+
+## Convergence (after the run)
+
+`/speckit-converge` ran on all five specs against `main` at `4402649` (docs PR #16):
+
+- **001, 003 and 004:** converged.
+- **002:** T023 (LOW). No test asserted that two quick-adds give one Terracotta line at quantity 2.
+- **005:** T016 (MEDIUM). After a reset, a full reload wrote the demo key back with no shopper change,
+  which contradicts research R1.
+
+How the two tasks landed:
+
+- **Pre-flight split the brief.** The Coding Agent's pre-flight stopped brief 10, because it mixed two
+  features (constitution IV) and asked for red-then-green on a coverage test (constitution II).
+- **Brief 10a, PR #17:** fixes T016, with two e2e cases that fail on the base and pass on the head.
+- **Brief 10b, PR #18:** adds T023's test, proven by two killed mutations.
+- **Both merged through the strict gate**, with CodeRabbit approval and 0 threads. `main` is now
+  `aebea80`.
+- **PR #16 needed a correction:** CodeRabbit applied the Coding-Agent-only `specs/**` rule to the
+  orchestrator's PR. It withdrew both Majors when asked to re-check the rule's scope.
 
 ## Known limit, accepted by the maintainer
 
@@ -84,4 +106,3 @@ empty, per the persistence contract. PR #10 documents it.
 
 - Deep Scan baseline (after PR 5) and the pre-release Deep Scan (after PR 9). Both are on the
   maintainer list in PR-MAP.
-- Merge this docs PR (stage log and report).
