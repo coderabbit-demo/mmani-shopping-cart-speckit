@@ -50,7 +50,7 @@ export function Shell({ children }: { children: ReactNode }) {
           <Link href="/wishlist" onClick={leaveMissing}>Wishlist ({wishlistCount})</Link>
           <Link href="/orders" onClick={leaveMissing}>Orders</Link>
           <Link href="/account" onClick={leaveMissing}>Account</Link>
-          <Link className="bag-link" href="/bag" onClick={leaveMissing}><ShoppingBag aria-hidden="true" size={17} /> Bag ({bagCount})</Link>
+          <Link className="bag-link" href="/cart" onClick={leaveMissing}><ShoppingBag aria-hidden="true" size={17} /> Bag ({bagCount})</Link>
         </nav>
       </div>
     </header>
