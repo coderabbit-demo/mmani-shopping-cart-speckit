@@ -18,8 +18,8 @@ export function CartView() {
   function apply(event: React.FormEvent) { event.preventDefault(); setError(applyCoupon(code) ?? ""); }
   return <section className={`wrap ${styles.page}`}>
     <h1>Your bag</h1>
-    {!hydrated ? null : state.cart.length === 0 ? <div className={styles.empty}><p>Your bag is empty.</p><Link href="/">Continue shopping</Link></div> : <div className={styles.layout}>
-      <div><ul className={styles.lines}>{state.cart.map((line) => {
+    {!hydrated ? null : <div className={state.cart.length === 0 ? styles.empty : styles.layout}>
+      <div>{state.cart.length === 0 ? <><p>Your bag is empty.</p><Link href="/">Continue shopping</Link></> : <><ul className={styles.lines}>{state.cart.map((line) => {
         const product = productById(line.productId);
         if (!product) return null;
         return <li className={styles.line} key={`${line.productId}:${line.color}`}>
@@ -28,10 +28,10 @@ export function CartView() {
           <p className={styles.amount}>{money(lineTotal(line))}</p>
         </li>;
       })}</ul>
-      <form className={styles.coupon} onSubmit={apply}><label htmlFor={`${errorId}-code`}>Discount code</label><div><input id={`${errorId}-code`} value={code} onChange={(event) => setCode(event.target.value)} aria-describedby={error ? errorId : undefined} /><button type="submit">Apply</button></div>{error && <p id={errorId} className={styles.error}>{error}</p>}{state.coupon && <button type="button" onClick={() => { removeCoupon(); setError(""); }}>Remove code</button>}</form>
-      <p role="status" aria-live="polite">{state.couponNotice}</p>
-      <fieldset className={styles.delivery}><legend>Delivery</legend><label><input type="radio" name="delivery" checked={state.delivery === "standard"} onChange={() => setDelivery("standard")} />Standard — Free</label><label><input type="radio" name="delivery" checked={state.delivery === "express"} onChange={() => setDelivery("express")} />Express — $12</label></fieldset></div>
-      <aside><OrderSummary totals={totals} delivery={state.delivery} /><Link className={styles.checkout} href="/checkout">Checkout</Link></aside>
+      <form className={styles.coupon} onSubmit={apply}><label htmlFor={`${errorId}-code`}>Discount code</label><div><input id={`${errorId}-code`} value={code} onChange={(event) => setCode(event.target.value)} aria-describedby={error ? errorId : undefined} /><button type="submit">Apply</button></div>{error && <p id={errorId} className={styles.error}>{error}</p>}{state.coupon && <button type="button" onClick={() => { removeCoupon(); setError(""); }}>Remove code</button>}</form></>}
+      {(state.cart.length > 0 || state.couponNotice) && <p role="status" aria-live="polite">{state.couponNotice}</p>}
+      {state.cart.length > 0 && <fieldset className={styles.delivery}><legend>Delivery</legend><label><input type="radio" name="delivery" checked={state.delivery === "standard"} onChange={() => setDelivery("standard")} />Standard — Free</label><label><input type="radio" name="delivery" checked={state.delivery === "express"} onChange={() => setDelivery("express")} />Express — $12</label></fieldset>}</div>
+      {state.cart.length > 0 && <aside><OrderSummary totals={totals} delivery={state.delivery} /><Link className={styles.checkout} href="/checkout">Checkout</Link></aside>}
     </div>}
   </section>;
 }

@@ -90,6 +90,22 @@ test("rule 3: DESK15 eligibility, removal, and invalid input", async ({ page }) 
   await expect(page.getByText("DESK15 was removed because your subtotal is below $100.")).toHaveCount(0);
 });
 
+test("rule 3: removing the last line explains coupon removal", async ({ page }) => {
+  await addLamp(page);
+  await goToBag(page);
+  await page.getByLabel("Discount code").fill("DESK15");
+  await page.getByRole("button", { name: "Apply", exact: true }).click();
+  await expect(page.getByText("DESK15 (15%)")).toBeVisible();
+  const status = await page.getByRole("status").elementHandle();
+  await page.getByRole("button", { name: "Remove Arc desk lamp (Sage)" }).click();
+  await expect(page.getByText("Your bag is empty.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Checkout" })).toHaveCount(0);
+  const notice = page.getByRole("status");
+  await expect(notice).toHaveText("DESK15 was removed because your subtotal is below $100.");
+  await expect(notice).toHaveAttribute("aria-live", "polite");
+  expect(await notice.evaluate((element, previous) => element === previous, status)).toBe(true);
+});
+
 test("rule 4: delivery choice changes the total", async ({ page }) => {
   await openProduct(page, "form-mechanical-keyboard");
   await page.getByRole("button", { name: "Add to bag", exact: true }).click();
