@@ -71,3 +71,29 @@ test("@golden filled cart accessible structure", async ({ page }, testInfo) => {
   await expect(page.getByText("Color: Sage")).toBeVisible();
   await matchPageSnapshot(page, testInfo, "cart-filled.aria.yml");
 });
+
+test("@golden checkout accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Add Arc desk lamp to bag" }).click();
+  await page.getByRole("link", { name: /Bag \(/ }).click();
+  await page.getByRole("link", { name: "Checkout", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Place order" })).toBeEnabled();
+  await matchPageSnapshot(page, testInfo, "checkout.aria.yml");
+});
+
+test("@golden checkout success accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Add Arc desk lamp to bag" }).click();
+  await page.getByRole("link", { name: /Bag \(/ }).click();
+  await page.getByRole("link", { name: "Checkout", exact: true }).click();
+  for (const [label, value] of Object.entries({ "Full name": "Alex Smith", Email: "alex@example.com", Address: "123 Main St", City: "Portland", "Postal code": "97201" })) await page.getByLabel(label, { exact: true }).fill(value);
+  await page.getByRole("button", { name: "Place order" }).click();
+  await expect(page.getByRole("heading", { name: "Thank you, Alex!" })).toBeVisible();
+  await matchPageSnapshot(page, testInfo, "checkout-success.aria.yml");
+});
+
+test("@golden empty orders accessible structure", async ({ page }, testInfo) => {
+  await page.goto("/orders");
+  await expect(page.getByText("No orders yet.")).toBeVisible();
+  await matchPageSnapshot(page, testInfo, "orders-empty.aria.yml");
+});

@@ -1,0 +1,26 @@
+- /children: deep-equal
+- banner:
+  - link "DeskDrop":
+    - /url: /
+  - navigation "Main navigation":
+    - link "Shop":
+      - /url: /
+    - link "Wishlist (0)":
+      - /url: /wishlist
+    - link "Orders":
+      - /url: /orders
+    - link "Account":
+      - /url: /account
+    - link "Bag (0)":
+      - /url: /cart
+- main:
+  - heading "Your orders" [level=1]
+  - paragraph: No orders yet.
+  - link "Start shopping":
+    - /url: /
+- contentinfo:
+  - text: DeskDrop.
+  - paragraph: Little things for your big ideas.
+  - text: Built with
+  - img "CodeRabbit"
+- alert
