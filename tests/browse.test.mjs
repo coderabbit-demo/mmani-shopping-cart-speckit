@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { products } from "../lib/catalog.ts";
-import { defaultFilters, filterProducts, sortOptions } from "../lib/browse.ts";
+import { defaultFilters, filterProducts, quickAddColor, sortOptions } from "../lib/browse.ts";
 
 const names = (filters = {}) => filterProducts(products, { ...defaultFilters, ...filters }).map((product) => product.name);
 
@@ -30,4 +30,11 @@ test("sorts prices and ratings stably without modifying the catalog", () => {
   assert.deepEqual(products.map((product) => product.id), before);
   assert.deepEqual(filterProducts(products, defaultFilters).map((product) => product.id), before);
   assert.deepEqual(sortOptions.map((option) => option.label), ["Featured", "Price: low to high", "Price: high to low", "Top rated"]);
+});
+
+
+test("quick add selects a product's first color", () => {
+  const lamp = products.find((product) => product.id === "arc-desk-lamp");
+  assert.ok(lamp.colors.length > 1);
+  assert.equal(quickAddColor(lamp), "Terracotta");
 });

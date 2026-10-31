@@ -61,7 +61,7 @@ test("quick add, wishlist, quantity cap and navigation retain state", async ({ p
   await add.click();
   await add.click();
   await expect(page.getByRole("link", { name: "Bag (2)" })).toBeVisible();
-  await expect(lamp.getByText("In bag: Terracotta × 2", { exact: true })).toBeVisible();
+  await expect(page.locator("article").getByText(/In bag:/)).toHaveCount(0);
   for (let i = 0; i < 10; i++) await add.click();
   await expect(page.getByRole("link", { name: "Bag (10)" })).toBeVisible();
   await expect(card(page, "Slow time clock").getByRole("button", { name: "Sold out" })).toBeDisabled();
@@ -164,3 +164,55 @@ test("Shop from a synthetic 404 restores home and preserves counts", async ({ pa
   await expect(page.getByRole("link", { name: "Bag (1)" })).toBeVisible();
   await expect(page.getByRole("link", { name: "Wishlist (1)" })).toBeVisible();
 });
+
+for (const [name, selector] of [["hero link", ".hero-link"], ["add-to-bag button", ".add-button:not(:disabled)"], ["primary button", ".primary-button"]] as const) {
+  test(`${name} uses regular weight`, async ({ page }) => {
+    await page.goto(name === "primary button" ? "/no-such-page" : "/");
+    await expect(page.locator(selector).first()).toHaveCSS("font-weight", "400");
+  });
+}
+
+for (const [status, destination] of [[404, "/wishlist"], [500, "/wishlist"], [404, "/"]] as const) {
+  test(`stale product lookup (${status}) cannot replace ${destination}`, async ({ page }) => {
+    let release!: () => void;
+    let started!: () => void;
+    let finished!: () => void;
+    const gate = new Promise<void>((resolve) => { release = resolve; });
+    const requestStarted = new Promise<void>((resolve) => { started = resolve; });
+    const requestFinished = new Promise<void>((resolve) => { finished = resolve; });
+    await page.addInitScript(() => {
+      const originalFetch = window.fetch;
+      window.fetch = (...args) => {
+        const response = originalFetch(...args);
+        if (args[0] === "/products/arc-desk-lamp") {
+          return response.finally(() => { (window as Window & { lookupSettled?: boolean }).lookupSettled = true; });
+        }
+        return response;
+      };
+    });
+    await page.route(/\/wishlist(?:\?|$)/, async (route) => {
+      const destination = new URL(route.request().url());
+      destination.pathname = "/";
+      await route.continue({ url: destination.toString() });
+    });
+    await page.route("**/products/arc-desk-lamp", async (route) => {
+      started();
+      await gate;
+      try { await route.fulfill({ status, body: "unavailable" }); } catch { }
+      finished();
+    });
+    await page.goto("/");
+    await card(page, "Arc desk lamp").getByRole("link", { name: "Arc desk lamp", exact: true }).click();
+    await requestStarted;
+    await page.getByRole("link", { name: destination === "/" ? "Shop" : "Wishlist (0)", exact: true }).click();
+    await expect(page).toHaveURL(destination);
+    await expect(page.getByRole("heading", { name: "DeskDrop", level: 1 })).toBeVisible();
+    release();
+    await requestFinished;
+    await page.waitForFunction(() => (window as Window & { lookupSettled?: boolean }).lookupSettled === true);
+    await page.evaluate(() => new Promise((resolve) => setTimeout(resolve, 100)));
+    await expect(page).toHaveURL(destination);
+    await expect(page.getByRole("heading", { name: "DeskDrop", level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Page not found" })).toHaveCount(0);
+  });
+}

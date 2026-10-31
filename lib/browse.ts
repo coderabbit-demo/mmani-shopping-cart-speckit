@@ -13,6 +13,9 @@ export const sortOptions: { value: BrowseFilters["sort"]; label: string }[] = [
   { value: "price-desc", label: "Price: high to low" },
   { value: "rating", label: "Top rated" },
 ];
+export function quickAddColor(product: Product): string {
+  return product.colors[0].name;
+}
 export function filterProducts(products: Product[], filters: BrowseFilters): Product[] {
   const query = filters.query.trim().toLowerCase();
   const filtered = products.filter((product) =>

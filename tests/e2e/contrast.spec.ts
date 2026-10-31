@@ -34,7 +34,18 @@ for (const scheme of ["dark", "light"] as const) {
       const outline = await locator.evaluate((element) => { const style = getComputedStyle(element); return { style: style.outlineStyle, width: style.outlineWidth, color: style.outlineColor }; });
       expect(outline.style).not.toBe("none");
       expect(parseFloat(outline.width)).toBeGreaterThan(0);
-      expect(outline.color).toBe("rgb(255, 87, 10)");
+      const focusColor = await page.evaluate(() => {
+        const probe = document.createElement("span");
+        probe.style.color = "var(--color-focus)";
+        document.body.append(probe);
+        const color = getComputedStyle(probe).color;
+        probe.remove();
+        return color;
+      });
+      expect(outline.color).toBe(focusColor);
+      for (const background of ["bg", "surface"]) {
+        expect(contrastRatio(outline.color, tokens[background]), `focus/${background}`).toBeGreaterThanOrEqual(3);
+      }
     }
   });
 }
@@ -52,6 +63,24 @@ for (const scheme of ["dark", "light"] as const) {
         page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--color-bg").trim()),
       ]);
       expect(contrastRatio(color, background)).toBeGreaterThanOrEqual(4.5);
+    });
+  }
+}
+
+for (const scheme of ["dark", "light"] as const) {
+  for (const background of ["bg", "surface"] as const) {
+    test(`${scheme} field boundary contrasts with ${background}`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme: scheme });
+      await page.goto("/");
+      const colors = await page.evaluate((background) => {
+        const root = getComputedStyle(document.documentElement);
+        const search = getComputedStyle(document.querySelector(".search-field")!).borderTopColor;
+        const select = getComputedStyle(document.querySelector(".select-field")!).borderTopColor;
+        return { search, select, background: root.getPropertyValue(`--color-${background}`).trim() };
+      }, background);
+      for (const color of [colors.search, colors.select]) {
+        expect(contrastRatio(color, colors.background)).toBeGreaterThanOrEqual(3);
+      }
     });
   }
 }
