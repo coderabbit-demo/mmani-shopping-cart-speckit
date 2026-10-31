@@ -165,3 +165,12 @@ docs8,merged,2026-10-31T03:55:46Z,2026-10-31T03:55:46Z,merged by orchestrator wi
 9,post-PR re-review (CodeRabbit),2026-10-31T06:17:30Z,2026-10-31T06:26:20Z,"APPROVED at 5cc2d0e, 0 threads; CI green"
 9,strict gate PASS and merge,2026-10-31T06:26:25Z,2026-10-31T06:26:40Z,merged by orchestrator with --match-head-commit 5cc2d0e; SC-34 moved to Done by hand
 docs-final,PR opened,2026-10-31T06:27:52Z,,stage log and run report
+docs-final,CI e2e failure,2026-10-31T06:28:55Z,2026-10-31T06:34:55Z,"checkout-success golden flake (route announcer empty), failed twice incl. rerun; CodeRabbit APPROVED"
+9b,pre-flight and implement,2026-10-31T06:35:50Z,,task 7b014067 (lane A); deterministic checkout-success golden
+9b,implement,2026-10-31T06:35:50Z,2026-10-31T06:44:00Z,"2 files; repeat runs main 13/20, patch 20/20; pushed 9d72ed6 plus brief commit 6ce80b6"
+9b,verify,2026-10-31T06:45:00Z,,scope gate PASS; checks (e2e x3), CLI and combined judge running
+9b,verify,2026-10-31T06:45:00Z,2026-10-31T06:50:27Z,"checks green (64 unit, 83 e2e x3); CLI 0; combined judge PASS"
+9b,PR opened,2026-10-31T06:50:27Z,,PR #15
+9b,post-PR review (CodeRabbit),2026-10-31T06:50:00Z,2026-10-31T06:55:40Z,"APPROVED at 6ce80b6, 0 threads, CI green"
+9b,strict gate PASS and merge,2026-10-31T06:55:47Z,2026-10-31T06:56:10Z,merged by orchestrator with --match-head-commit 6ce80b6
+docs-final,update with main,2026-10-31T06:56:10Z,,merge main into docs/run2-stage-log after PR 9b
